@@ -59,12 +59,12 @@ export function Nav() {
             : 'border-b border-transparent'
         } ${hidden && !open ? 'max-md:-translate-y-full' : 'translate-y-0'}`}
       >
-        <div className="container-page flex h-[72px] items-center justify-between gap-6">
+        <div className="container-page flex h-[72px] items-center justify-between gap-3 md:gap-6">
           <a
             href="#top"
-            className="group flex items-center gap-2.5 font-mono text-[0.78rem] tracking-[0.14em] uppercase"
+            className="group flex shrink-0 items-center gap-2.5 font-mono text-[0.7rem] tracking-[0.1em] whitespace-nowrap uppercase md:text-[0.78rem] md:tracking-[0.14em]"
           >
-            <span className="inline-block size-2 rounded-full bg-accent transition-transform duration-500 group-hover:scale-125" />
+            <span className="inline-block size-2 shrink-0 rounded-full bg-accent transition-transform duration-500 group-hover:scale-125" />
             <span className="text-ink">Danilo Bossolani</span>
           </a>
 
@@ -146,13 +146,13 @@ export function Nav() {
               </button>
             </div>
 
-            <nav className="container-page relative flex flex-col pt-4" aria-label={t.nav.menu}>
+            <nav className="container-page relative flex flex-col pt-2" aria-label={t.nav.menu}>
               {sections.map((id, i) => (
                 <motion.a
                   key={id}
                   href={`#${id}`}
                   onClick={() => setOpen(false)}
-                  className="tap tap-line group flex items-baseline gap-4 border-b border-line py-5"
+                  className="tap tap-line group flex items-baseline gap-4 border-b border-line py-4"
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.06 * i + 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -170,7 +170,7 @@ export function Nav() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.42, duration: 0.5 }}
-              className="container-page pb-safe relative mt-auto pt-10"
+              className="container-page pb-safe relative mt-auto pt-8"
             >
               <div className="flex flex-col gap-1 font-mono text-xs text-muted">
                 <a href={`mailto:${profile.email}`} className="tap-ink py-1.5">
@@ -197,7 +197,7 @@ export function Nav() {
               {/* Tema e idioma ficam repetidos aqui porque o cabeçalho some
                   atrás do menu — sem isso não dá para trocar de tema com o
                   menu aberto. */}
-              <div className="mt-8 flex items-center gap-2 border-t border-line pt-6">
+              <div className="mt-6 flex items-center gap-2 border-t border-line pt-5">
                 <button
                   type="button"
                   onClick={toggleLang}

@@ -21,8 +21,8 @@ export function Hero() {
     <span className="block overflow-hidden">
       <motion.span
         className={`block ${className}`}
-        initial={{ y: reduced ? 0 : '100%', opacity: reduced ? 0 : 1 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={reduced ? false : { y: '100%' }}
+        animate={{ y: 0 }}
         transition={{ duration: 1.05, delay, ease }}
       >
         {text}
@@ -45,12 +45,12 @@ export function Hero() {
         className="container-page flex min-h-[calc(100svh-72px)] flex-col justify-center py-12 md:py-16"
       >
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={reduced ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
           className="mb-8 flex flex-wrap items-center gap-x-5 gap-y-3 md:mb-10"
         >
-          <span className="flex items-center gap-2.5 rounded-full border border-line bg-surface/60 py-1.5 pr-4 pl-3 font-mono text-[0.68rem] tracking-[0.12em] text-ink-soft uppercase">
+          <span className="flex items-center gap-2.5 rounded-full border border-line bg-surface/60 py-1.5 pr-4 pl-3 font-mono text-[0.61rem] tracking-[0.1em] text-ink-soft uppercase md:text-[0.68rem] md:tracking-[0.12em]">
             <span className="relative flex size-1.5">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-70" />
               <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
@@ -68,8 +68,8 @@ export function Hero() {
           <span className="block overflow-hidden">
             <motion.span
               className="block"
-              initial={{ y: reduced ? 0 : '100%', opacity: reduced ? 0 : 1 }}
-              animate={{ y: 0, opacity: 1 }}
+              initial={reduced ? false : { y: '100%' }}
+              animate={{ y: 0 }}
               transition={{ duration: 1.05, delay: 0.28, ease }}
             >
               {t.hero.line3}{' '}
@@ -79,7 +79,7 @@ export function Hero() {
         </h1>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={reduced ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.55, ease }}
           className="mt-10 grid gap-8 border-t border-line pt-7 md:mt-12 md:grid-cols-[1.1fr_1fr] md:gap-16 md:pt-8 lg:grid-cols-[1fr_1fr_auto]"
@@ -136,7 +136,7 @@ export function Hero() {
           espaço, então vira um fio com um pulso descendo. */}
       <motion.div
         aria-hidden
-        initial={{ opacity: 0 }}
+        initial={reduced ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.1, duration: 0.8 }}
         className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center md:bottom-7"

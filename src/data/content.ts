@@ -398,7 +398,7 @@ export const content = {
       copied: 'Copiado',
     },
     footer: {
-      built: 'Feito com React, TypeScript e Tailwind. Publicado na Cloudflare.',
+      built: 'Feito com React, TypeScript e Tailwind. Publicado no GitHub Pages.',
       rights: 'Todos os direitos reservados.',
       top: 'Voltar ao topo',
     },
@@ -513,7 +513,7 @@ export const content = {
       copied: 'Copied',
     },
     footer: {
-      built: 'Built with React, TypeScript and Tailwind. Published on Cloudflare.',
+      built: 'Built with React, TypeScript and Tailwind. Published on GitHub Pages.',
       rights: 'All rights reserved.',
       top: 'Back to top',
     },

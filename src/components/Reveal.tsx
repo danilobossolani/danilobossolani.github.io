@@ -11,16 +11,24 @@ type RevealProps = {
 
 /**
  * Sobe e revela o conteúdo quando ele entra na viewport, uma única vez.
- * Respeita prefers-reduced-motion: nesse caso entra sem deslocamento.
+ *
+ * Com "reduzir movimento" ligado não há animação nenhuma: o conteúdo já
+ * nasce no lugar. Antes ele começava em opacity 0 e contava com a animação
+ * para aparecer — o que deixava o texto invisível se ela demorasse ou não
+ * rodasse. Nada aqui pode ser a única coisa entre o conteúdo e a tela.
  */
 export function Reveal({ children, delay = 0, y = 28, className, as = 'div' }: RevealProps) {
   const reduced = useReducedMotion();
   const Tag = motion[as];
 
+  if (reduced) {
+    return <Tag className={className}>{children}</Tag>;
+  }
+
   return (
     <Tag
       className={className}
-      initial={{ opacity: 0, y: reduced ? 0 : y }}
+      initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] }}
@@ -44,6 +52,11 @@ export function RevealWords({
   delay?: number;
 }) {
   const reduced = useReducedMotion();
+
+  if (reduced) {
+    return <span className={className}>{text}</span>;
+  }
+
   const words = text.split(' ');
 
   return (
@@ -52,8 +65,8 @@ export function RevealWords({
         <span key={`${word}-${i}`} className="inline-block overflow-hidden align-bottom">
           <motion.span
             className="inline-block"
-            initial={{ y: reduced ? 0 : '105%', opacity: reduced ? 0 : 1 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            initial={{ y: '105%' }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{
               duration: 0.9,
@@ -62,7 +75,7 @@ export function RevealWords({
             }}
           >
             {word}
-            {i < words.length - 1 ? ' ' : ''}
+            {i < words.length - 1 ? ' ' : ''}
           </motion.span>
         </span>
       ))}

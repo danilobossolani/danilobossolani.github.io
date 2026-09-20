@@ -5,7 +5,7 @@ import {
   useScroll,
   useTransform,
 } from 'motion/react';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSite } from '../context/SiteContext';
 import { profile } from '../data/content';
 import { Reveal, RevealWords } from './Reveal';
@@ -23,6 +23,20 @@ const SIZES = [
 const srcSet = (ext: string) =>
   profile.photo.widths.map((w) => `/img/danilo-${w}.${ext} ${w}w`).join(', ');
 
+/** True em aparelhos com ponteiro — ou seja, onde `hover` realmente acontece. */
+function useHoverCapable() {
+  const [can, setCan] = useState(() => window.matchMedia('(hover: hover)').matches);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(hover: hover)');
+    const sync = () => setCan(mq.matches);
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
+
+  return can;
+}
+
 export function About() {
   const { t } = useSite();
   const reduced = useReducedMotion();
@@ -37,11 +51,14 @@ export function About() {
   // fica abaixo da folga do scale-110, senão a borda da imagem apareceria.
   const imageY = useTransform(scrollYProgress, [0, 1], reduced ? ['0%', '0%'] : ['-4%', '4%']);
 
-  // No desktop o hover tira o preto e branco. No celular não existe hover, então
-  // quem revela a cor é a própria rolagem: a foto ganha cor ao chegar ao centro
-  // da tela e volta ao sair. É o equivalente tátil do mesmo gesto.
+  // No desktop quem tira o preto e branco é o hover, exatamente como antes.
+  // No celular não existe hover, então quem revela a cor é a própria rolagem:
+  // a foto ganha cor ao chegar ao centro da tela e volta ao sair. Os dois
+  // caminhos nunca coexistem — senão um sobrescreveria o outro.
+  const hoverCapable = useHoverCapable();
   const gray = useTransform(scrollYProgress, [0.12, 0.38, 0.62, 0.9], [100, 0, 0, 100]);
   const filter = useMotionTemplate`grayscale(${gray}%)`;
+  const revelaRolando = !hoverCapable && !reduced;
 
   return (
     <section id="about" className="container-page scroll-mt-20 py-28 md:py-40">
@@ -69,8 +86,12 @@ export function About() {
                   height={profile.photo.intrinsic.height}
                   loading="lazy"
                   decoding="async"
-                  style={reduced ? { y: imageY } : { y: imageY, filter }}
-                  className="size-full scale-110 object-cover object-center"
+                  style={revelaRolando ? { y: imageY, filter } : { y: imageY }}
+                  className={`size-full scale-110 object-cover object-center ${
+                    hoverCapable
+                      ? 'grayscale transition-[filter] duration-700 hover:grayscale-0'
+                      : ''
+                  }`}
                 />
               </picture>
             </div>
