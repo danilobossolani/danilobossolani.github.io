@@ -59,7 +59,7 @@ export function About() {
         <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <div className="relative">
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-line bg-surface">
-              <motion.picture style={reduced ? undefined : { filter }}>
+              <picture>
                 <source srcSet={srcSet('avif')} sizes={SIZES} type="image/avif" />
                 <source srcSet={srcSet('webp')} sizes={SIZES} type="image/webp" />
                 <motion.img
@@ -69,10 +69,10 @@ export function About() {
                   height={profile.photo.intrinsic.height}
                   loading="lazy"
                   decoding="async"
-                  style={{ y: imageY }}
+                  style={reduced ? { y: imageY } : { y: imageY, filter }}
                   className="size-full scale-110 object-cover object-center"
                 />
-              </motion.picture>
+              </picture>
             </div>
 
             <div className="mt-5 flex items-baseline justify-between gap-4 font-mono text-[0.68rem] tracking-[0.12em] text-muted uppercase">
