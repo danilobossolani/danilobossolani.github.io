@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "compatibility_date": "2026-09-17",
+  "assets": {
+    // O site é estático: o Worker só serve os arquivos do build.
+    "directory": "./dist",
+    // Qualquer rota desconhecida cai no index.html — o site é uma página só,
+    // mas isso mantém âncoras e futuras rotas funcionando no reload.
+    "not_found_handling": "single-page-application"
+  }
+}

@@ -1,0 +1,10 @@
+node_modules
+dist
+.wrangler
+.DS_Store
+*.local
+.env
+.env.*
+
+# Cache do fontconfig usado pelo gerador da capa.
+scripts/.tmp
