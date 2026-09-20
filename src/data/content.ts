@@ -13,7 +13,7 @@ export const profile = {
   email: 'danbossolani@gmail.com',
   phone: '+55 15 99119-7670',
   phoneHref: '+5515991197670',
-  location: { pt: 'Sorocaba, SP — Brasil', en: 'Sorocaba, SP — Brazil' } as Localized,
+  location: { pt: 'Sorocaba, SP · Brasil', en: 'Sorocaba, SP · Brazil' } as Localized,
   github: 'https://github.com/danilobossolani',
   githubHandle: 'danilobossolani',
   linkedin: 'https://linkedin.com/in/danilobossolani',
@@ -54,7 +54,7 @@ export const projects: Project[] = [
       summary:
         'Aplicação web para organizar e acompanhar oportunidades imobiliárias vindas de fontes públicas. Código-fonte privado por confidencialidade comercial.',
       highlights: [
-        'Back-end em Java 21 com Spring Boot, estruturado em camadas — Controller, Service e Repository.',
+        'Back-end em Java 21 com Spring Boot, estruturado em camadas: Controller, Service e Repository.',
         'Modelagem e persistência das entidades em PostgreSQL via JPA.',
         'Painel web em Thymeleaf para consulta e acompanhamento dos imóveis cadastrados.',
       ],
@@ -64,7 +64,7 @@ export const projects: Project[] = [
       summary:
         'Web application that organizes and tracks real estate opportunities sourced from public data. Source code kept private for commercial confidentiality.',
       highlights: [
-        'Java 21 and Spring Boot back-end, structured in layers — Controller, Service and Repository.',
+        'Java 21 and Spring Boot back-end, structured in layers: Controller, Service and Repository.',
         'Entity modeling and persistence on PostgreSQL through JPA.',
         'Thymeleaf dashboard for querying and following up on registered properties.',
       ],
@@ -80,7 +80,7 @@ export const projects: Project[] = [
     pt: {
       role: 'Full stack · RAG',
       summary:
-        'Plataforma full stack de catálogo de veículos com captura de leads e assistente virtual baseado em RAG — busca semântica no banco combinada com respostas contextualizadas do modelo.',
+        'Plataforma full stack de catálogo de veículos com captura de leads e assistente virtual baseado em RAG: busca semântica no banco combinada com respostas contextualizadas do modelo.',
       highlights: [
         'Busca semântica sobre o catálogo usando PostgreSQL com pgvector, alimentando o contexto do assistente.',
         'Respostas geradas pela Gemini API a partir apenas dos veículos realmente disponíveis, reduzindo alucinação.',
@@ -90,7 +90,7 @@ export const projects: Project[] = [
     en: {
       role: 'Full stack · RAG',
       summary:
-        'Full stack car marketplace with lead capture and a RAG-powered assistant — semantic search over the database combined with context-grounded model answers.',
+        'Full stack car marketplace with lead capture and a RAG-powered assistant: semantic search over the database combined with context-grounded model answers.',
       highlights: [
         'Semantic search across the catalog using PostgreSQL with pgvector, feeding the assistant its context.',
         'Answers generated through the Gemini API from actually available vehicles only, cutting hallucination.',
@@ -101,7 +101,7 @@ export const projects: Project[] = [
   {
     id: 'party-landing',
     year: '2026',
-    title: '+Party — Landing Page',
+    title: '+Party Landing Page',
     stack: ['Angular', 'TypeScript', 'SCSS', 'Cloudflare Workers', 'GitHub Actions'],
     featured: true,
     links: [{ label: 'GitHub', href: 'https://github.com/PedroLima-07/Landing-page-Party' }],
@@ -183,7 +183,7 @@ export const projects: Project[] = [
   },
   {
     id: 'data-structures',
-    year: '2025 — 2026',
+    year: '2025 a 2026',
     title: { pt: 'Algoritmos & Estruturas de Dados', en: 'Algorithms & Data Structures' },
     stack: [
       'Java',
@@ -202,7 +202,7 @@ export const projects: Project[] = [
     pt: {
       role: 'Fundamentos · Java',
       summary:
-        'Coleção de implementações em Java feitas ao longo do curso e por conta própria — a base que sustenta o resto do trabalho back-end.',
+        'Coleção de implementações em Java feitas ao longo do curso e por conta própria. É a base que sustenta o resto do trabalho back-end.',
       highlights: [
         'Sistema de ranking de jogadores e agenda de contatos com árvore binária de busca.',
         'Listas encadeadas, pilhas e filas implementadas do zero, sem biblioteca pronta.',
@@ -212,7 +212,7 @@ export const projects: Project[] = [
     en: {
       role: 'Fundamentals · Java',
       summary:
-        'A collection of Java implementations built through coursework and on my own — the foundation the rest of the back-end work stands on.',
+        'A collection of Java implementations built through coursework and on my own. It is the foundation the rest of the back-end work stands on.',
       highlights: [
         'Player ranking system and a contact book backed by a binary search tree.',
         'Linked lists, stacks and queues implemented from scratch, no ready-made library.',
@@ -317,9 +317,9 @@ export const content = {
     about: {
       eyebrow: 'Sobre',
       title: 'Quem está do outro lado do commit',
-      p1: 'Sou Danilo, desenvolvedor back-end em Sorocaba. Estudo Análise e Desenvolvimento de Sistemas na FACENS e passo a maior parte do tempo em Java e Spring Boot — arquitetura em camadas, APIs REST, modelagem de dados e a parte chata e importante de fazer o sistema não quebrar em produção.',
-      p2: 'Meu foco continua sendo back-end, mas front-end nunca foi obrigação para mim: gosto de React e Angular, de cuidar do detalhe visual e de entregar a coisa inteira — do banco até a tela. É o que me deixa confortável em trabalho full stack e em freelance, onde não existe alguém para passar a bola.',
-      p3: 'Aprendi que código bom vem de revisão honesta. Uso Claude Code, Codex e Gemini todos os dias como par de revisão — questionar decisão, achar caso de borda, discutir arquitetura antes de escrever. Não é atalho, é um jeito de aprender mais rápido e entregar com menos retrabalho.',
+      p1: 'Sou Danilo, desenvolvedor back-end em Sorocaba. Estudo Análise e Desenvolvimento de Sistemas na FACENS e passo a maior parte do tempo em Java e Spring Boot: arquitetura em camadas, APIs REST, modelagem de dados e a parte chata e importante de fazer o sistema não quebrar em produção.',
+      p2: 'Meu foco continua sendo back-end, mas front-end nunca foi obrigação para mim: gosto de React e Angular, de cuidar do detalhe visual e de entregar a coisa inteira, do banco até a tela. É o que me deixa confortável em trabalho full stack e em freelance, onde não existe alguém para passar a bola.',
+      p3: 'Aprendi que código bom vem de revisão honesta. Uso Claude Code, Codex e Gemini todos os dias como par de revisão: questionar decisão, achar caso de borda, discutir arquitetura antes de escrever. Não é atalho, é um jeito de aprender mais rápido e entregar com menos retrabalho.',
       facts: [
         { label: 'Base', value: 'Sorocaba, SP' },
         { label: 'Formação', value: 'ADS · FACENS · 2025–2027' },
@@ -330,16 +330,16 @@ export const content = {
     stack: {
       eyebrow: 'Stack',
       title: 'Ferramentas que uso de verdade',
-      note: 'Nada de lista decorativa — é o que aparece nos projetos acima e no dia a dia.',
+      note: 'Nada de lista decorativa. É o que aparece nos projetos acima e no dia a dia.',
     },
     ai: {
       eyebrow: 'Como eu trabalho',
       title: 'IA como par, não como piloto automático',
-      p: 'Uso Claude Code, Codex e Gemini no fluxo de trabalho todo dia — para revisar código antes do commit, discutir arquitetura antes de escrever a primeira linha, entender stack nova e caçar o caso de borda que eu ainda não tinha enxergado. Também construo com IA: o AutoStore AI é um sistema RAG de ponta a ponta, com busca vetorial em pgvector e respostas ancoradas em dados reais. A decisão continua sendo minha; a máquina só acelera o caminho até ela.',
+      p: 'Uso Claude Code, Codex e Gemini no fluxo de trabalho todo dia, para revisar código antes do commit, discutir arquitetura antes de escrever a primeira linha, entender stack nova e caçar o caso de borda que eu ainda não tinha enxergado. Também construo com IA: o AutoStore AI é um sistema RAG de ponta a ponta, com busca vetorial em pgvector e respostas ancoradas em dados reais. A decisão continua sendo minha; a máquina só acelera o caminho até ela.',
       cards: [
         {
           title: 'Revisão de código',
-          body: 'Segunda leitura em cada mudança relevante — caso de borda, nome ruim, lógica que só funciona no caminho feliz.',
+          body: 'Segunda leitura em cada mudança relevante: caso de borda, nome ruim, lógica que só funciona no caminho feliz.',
         },
         {
           title: 'Arquitetura',
@@ -358,7 +358,7 @@ export const content = {
     work: {
       eyebrow: 'Projetos',
       title: 'Trabalho selecionado',
-      note: 'Projetos autorais, acadêmicos e freelance — do back-end em Java a sistemas com IA.',
+      note: 'Projetos autorais, acadêmicos e freelance, do back-end em Java a sistemas com IA.',
       private: 'Código privado',
       viewAll: 'Ver tudo no GitHub',
     },
@@ -367,19 +367,19 @@ export const content = {
       title: 'Como cheguei aqui',
       items: [
         {
-          period: '2026 — agora',
+          period: '2026 até agora',
           title: 'Desenvolvedor freelance',
           org: 'Projetos próprios e para clientes',
           body: 'Sites e sistemas entregues direto para o cliente, do layout ao deploy na Cloudflare. Em paralelo, o Judicial Property Pipeline em Java e Spring Boot.',
         },
         {
-          period: '2025 — 2027',
+          period: '2025 a 2027',
           title: 'Análise e Desenvolvimento de Sistemas',
-          org: 'FACENS — Sorocaba, SP',
+          org: 'FACENS · Sorocaba, SP',
           body: '4º período. Estruturas de dados, orientação a objetos, banco de dados, engenharia de software e desenvolvimento web.',
         },
         {
-          period: 'Out/2025 — Mai/2026',
+          period: 'Out/2025 a Mai/2026',
           title: 'Auxiliar de vendas',
           org: 'JVN Ótica Sorocaba',
           body: 'Atendimento ao público em ambiente de alto fluxo, com metas e trabalho em equipe. Onde aprendi a ouvir o problema antes de propor solução.',
@@ -432,9 +432,9 @@ export const content = {
     about: {
       eyebrow: 'About',
       title: 'Who is on the other side of the commit',
-      p1: 'I am Danilo, a back-end developer based in Sorocaba, Brazil. I study Systems Analysis and Development at FACENS and spend most of my time in Java and Spring Boot — layered architecture, REST APIs, data modeling, and the tedious, important work of keeping things from breaking in production.',
-      p2: 'Back-end is still my focus, but front-end has never felt like an obligation: I enjoy React and Angular, care about the visual detail, and like shipping the whole thing — from the database to the screen. That is what makes me comfortable in full stack and freelance work, where there is nobody to pass the ball to.',
-      p3: 'I learned that good code comes from honest review. I use Claude Code, Codex and Gemini every day as a reviewing partner — to question a decision, find an edge case, argue about architecture before writing anything. Not a shortcut: a way to learn faster and ship with less rework.',
+      p1: 'I am Danilo, a back-end developer based in Sorocaba, Brazil. I study Systems Analysis and Development at FACENS and spend most of my time in Java and Spring Boot: layered architecture, REST APIs, data modeling, and the tedious, important work of keeping things from breaking in production.',
+      p2: 'Back-end is still my focus, but front-end has never felt like an obligation: I enjoy React and Angular, care about the visual detail, and like shipping the whole thing, from the database to the screen. That is what makes me comfortable in full stack and freelance work, where there is nobody to pass the ball to.',
+      p3: 'I learned that good code comes from honest review. I use Claude Code, Codex and Gemini every day as a reviewing partner: to question a decision, find an edge case, argue about architecture before writing anything. Not a shortcut: a way to learn faster and ship with less rework.',
       facts: [
         { label: 'Based in', value: 'Sorocaba, Brazil' },
         { label: 'Studying', value: 'Systems Dev · FACENS · 2025–2027' },
@@ -445,16 +445,16 @@ export const content = {
     stack: {
       eyebrow: 'Stack',
       title: 'Tools I actually use',
-      note: 'Not a decorative list — this is what shows up in the projects above and in daily work.',
+      note: 'Not a decorative list. This is what shows up in the projects above and in daily work.',
     },
     ai: {
       eyebrow: 'How I work',
       title: 'AI as a partner, not as autopilot',
-      p: 'I use Claude Code, Codex and Gemini across my workflow every day — reviewing code before the commit, arguing about architecture before the first line, learning a new stack, hunting the edge case I had not seen yet. I also build with AI: AutoStore AI is an end-to-end RAG system, with vector search on pgvector and answers grounded in real data. The decision stays mine; the machine just shortens the path to it.',
+      p: 'I use Claude Code, Codex and Gemini across my workflow every day, reviewing code before the commit, arguing about architecture before the first line, learning a new stack, hunting the edge case I had not seen yet. I also build with AI: AutoStore AI is an end-to-end RAG system, with vector search on pgvector and answers grounded in real data. The decision stays mine; the machine just shortens the path to it.',
       cards: [
         {
           title: 'Code review',
-          body: 'A second read on every meaningful change — edge cases, bad names, logic that only works on the happy path.',
+          body: 'A second read on every meaningful change: edge cases, bad names, logic that only works on the happy path.',
         },
         {
           title: 'Architecture',
@@ -473,7 +473,7 @@ export const content = {
     work: {
       eyebrow: 'Work',
       title: 'Selected projects',
-      note: 'Personal, academic and freelance work — from Java back-ends to AI-powered systems.',
+      note: 'Personal, academic and freelance work, from Java back-ends to AI-powered systems.',
       private: 'Private source',
       viewAll: 'See everything on GitHub',
     },
@@ -482,19 +482,19 @@ export const content = {
       title: 'How I got here',
       items: [
         {
-          period: '2026 — now',
+          period: '2026 to now',
           title: 'Freelance developer',
           org: 'Personal and client projects',
           body: 'Sites and systems delivered straight to the client, from layout to Cloudflare deploy. Alongside it, the Judicial Property Pipeline in Java and Spring Boot.',
         },
         {
-          period: '2025 — 2027',
+          period: '2025 to 2027',
           title: 'Systems Analysis and Development',
-          org: 'FACENS — Sorocaba, Brazil',
+          org: 'FACENS · Sorocaba, Brazil',
           body: '4th semester. Data structures, object orientation, databases, software engineering and web development.',
         },
         {
-          period: 'Oct 2025 — May 2026',
+          period: 'Oct 2025 to May 2026',
           title: 'Sales assistant',
           org: 'JVN Ótica Sorocaba',
           body: 'Customer-facing work in a high-traffic store, with targets and teamwork. Where I learned to hear the problem before proposing a solution.',
