@@ -74,7 +74,7 @@ const overlay = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}
   <!-- Selo de disponibilidade. -->
   <circle cx="${PAD + 7}" cy="${150}" r="6" fill="${ACCENT}"/>
   <text x="${PAD + 26}" y="${156}" font-family="JetBrains Mono" font-size="19"
-        letter-spacing="3.4" fill="${MUTED}">BACK-END &amp; FULL STACK</text>
+        letter-spacing="3.4" fill="${MUTED}">DESENVOLVEDOR BACK-END JÚNIOR</text>
 
   <text x="${PAD}" y="${baseline.name}" font-family="Instrument Serif" font-size="92"
         letter-spacing="-1.5" fill="${INK}">Danilo Bossolani</text>
@@ -83,7 +83,7 @@ const overlay = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}
         font-style="italic" fill="${ACCENT}">APIs, dados e sistemas com IA</text>
 
   <text x="${PAD}" y="${baseline.sub}" font-family="Inter" font-size="23"
-        fill="${SOFT}">Java · Spring Boot · Node.js · React · PostgreSQL</text>
+        fill="${SOFT}">Java · Spring Boot · PostgreSQL · Node.js</text>
 
   <line x1="${PAD}" y1="470" x2="${PAD + 470}" y2="470" stroke="${LINE}" stroke-width="1"/>
 

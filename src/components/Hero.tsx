@@ -1,12 +1,12 @@
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
-import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight, Download } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { profile, tr } from '../data/content';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 // Nomes proprios de tecnologia: iguais nos dois idiomas.
-const destaques = ['Java', 'Spring Boot', 'Node.js', 'React', 'PostgreSQL', 'TypeScript'];
+const destaques = ['Java', 'Spring Boot', 'PostgreSQL', 'Node.js', 'TypeScript', 'Docker'];
 
 export function Hero() {
   const { t, lang } = useSite();
@@ -107,7 +107,9 @@ export function Hero() {
             ))}
           </div>
 
-          <div className="flex flex-wrap items-start gap-3">
+          {/* Largura travada no desktop: com os três botões numa linha só,
+              esta coluna engolia o espaço da apresentação ao lado. */}
+          <div className="flex flex-wrap content-start items-start gap-3 lg:max-w-[20.5rem]">
             <a
               href="#work"
               className="tap group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-ink hover:-translate-y-0.5"
@@ -128,6 +130,26 @@ export function Hero() {
                 className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               />
             </a>
+
+            {/* Um botão só com as duas versões do PDF, em vez de dois botões
+                quase iguais disputando espaço com os outros dois. */}
+            <div className="inline-flex items-stretch overflow-hidden rounded-full border border-line-strong text-sm font-medium text-ink">
+              <span className="flex items-center gap-2 py-3 pr-3 pl-5">
+                <Download size={15} className="text-muted" />
+                {t.hero.cv}
+              </span>
+              {(['pt', 'en'] as const).map((l) => (
+                <a
+                  key={l}
+                  href={profile.cv[l]}
+                  download
+                  aria-label={l === 'pt' ? t.hero.cvPt : t.hero.cvEn}
+                  className="tap tap-ink flex items-center border-l border-line-strong px-4 py-3 font-mono text-[0.78rem] tracking-[0.08em] hover:bg-surface hover:text-accent"
+                >
+                  {l.toUpperCase()}
+                </a>
+              ))}
+            </div>
           </div>
         </motion.div>
       </motion.div>

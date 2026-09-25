@@ -35,13 +35,13 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           <span className="mt-1.5 block font-mono text-[0.7rem] tracking-[0.08em] text-muted">
             {/* O ano tem coluna própria no desktop; no celular ela não cabe,
                 então ele entra aqui em vez de sumir. */}
-            <span className="md:hidden">{project.year} · </span>
+            <span className="md:hidden">{tr(project.year, lang)} · </span>
             {copy.role}
           </span>
         </span>
 
         <span className="hidden font-mono text-[0.7rem] text-muted tabular-nums md:block">
-          {project.year}
+          {tr(project.year, lang)}
         </span>
 
         <span

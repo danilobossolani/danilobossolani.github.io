@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowUpRight, Check, Copy } from 'lucide-react';
+import { ArrowUpRight, Check, Copy, Download } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { profile } from '../data/content';
 import { Reveal, RevealWords } from './Reveal';
@@ -28,7 +28,6 @@ export function Contact() {
     { label: t.contact.phoneLabel, value: profile.phone, href: `https://wa.me/${profile.phoneHref}` },
     { label: 'LinkedIn', value: `in/${profile.linkedinHandle}`, href: profile.linkedin },
     { label: 'GitHub', value: `@${profile.githubHandle}`, href: profile.github },
-    { label: t.contact.cvLabel, value: t.contact.cvValue, href: profile.cv },
   ];
 
   return (
@@ -98,6 +97,30 @@ export function Contact() {
               </a>
             </Reveal>
           ))}
+
+          {/* O currículo tem duas versões, então a linha leva dois links
+              em vez de um só esticado. */}
+          <Reveal as="li" delay={0.05 * channels.length}>
+            <div className="flex items-center justify-between gap-6 py-5">
+              <span className="font-mono text-[0.68rem] tracking-[0.14em] text-muted uppercase">
+                {t.contact.cvLabel}
+              </span>
+              <span className="flex items-center gap-2">
+                {(['pt', 'en'] as const).map((l) => (
+                  <a
+                    key={l}
+                    href={profile.cv[l]}
+                    download
+                    aria-label={l === 'pt' ? t.hero.cvPt : t.hero.cvEn}
+                    className="tap tap-ink group inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 font-mono text-[0.78rem] text-ink hover:border-accent hover:text-accent"
+                  >
+                    {l.toUpperCase()}
+                    <Download size={13} className="text-muted group-hover:text-accent" />
+                  </a>
+                ))}
+              </span>
+            </div>
+          </Reveal>
         </ul>
       </div>
     </section>

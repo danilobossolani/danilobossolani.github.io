@@ -10,7 +10,6 @@ const words = [
   'Docker',
   'pgvector',
   'RAG',
-  'Power BI',
   'Cloudflare',
 ];
 
