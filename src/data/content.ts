@@ -41,7 +41,6 @@ export type Project = {
   title: Localized;
   stack: Localized[];
   featured?: boolean;
-  private?: boolean;
   links: { label: Localized; href: string }[];
   pt: { role: string; summary: string; highlights: string[] };
   en: { role: string; summary: string; highlights: string[] };
@@ -52,28 +51,41 @@ export const projects: Project[] = [
     id: 'judicial-pipeline',
     year: '2026',
     title: 'Judicial Property Pipeline',
-    stack: ['Java 21', 'Spring Boot', 'JPA', 'PostgreSQL', 'Docker', 'Thymeleaf', 'Playwright'],
+    stack: [
+      'Java 21',
+      'Spring Boot',
+      'JPA',
+      'Flyway',
+      'PostgreSQL',
+      'Docker',
+      'Thymeleaf',
+      'Playwright',
+    ],
     featured: true,
-    private: true,
-    links: [],
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/danilobossolani/judicial-property-pipeline',
+      },
+    ],
     pt: {
-      role: 'Freelance · sistema sob medida para cliente',
+      role: 'Freelance · sistema sob medida',
       summary:
-        'Sistema em Java e Spring Boot, em uso por um cliente, que coleta e organiza imóveis de leilão judicial. Código e dados privados por confidencialidade do cliente.',
+        'Sistema em Java e Spring Boot, em uso por um cliente, que coleta e organiza imóveis de leilão judicial.',
       highlights: [
-        'Coleta automática de imóveis de leilão judicial em várias fontes públicas (Sorocaba e Votorantim), cruzando com dados processuais.',
+        'Coleta automática de imóveis de leilão judicial em cerca de 10 fontes públicas (Sorocaba e Votorantim), cada uma isolada em seu próprio provider; falha em uma fonte não interrompe as outras.',
         'Deduplicação de cadastros, filtros (cidade, bairro, status), acompanhamento de praças e valores, e central de auditoria com histórico de cada coleta.',
-        'Feito para usuário não técnico: abre por atalho, roda no navegador e tem encerramento seguro que libera recursos sem apagar banco nem histórico.',
+        'Pensado para usuário não técnico (abre por atalho e roda no navegador), com CI rodando o quality gate a cada push e PR.',
       ],
     },
     en: {
-      role: 'Freelance · custom system for a client',
+      role: 'Freelance · custom system',
       summary:
-        'Java and Spring Boot system, used by a client, that collects and tracks judicial-auction properties. Source code and data are private under client confidentiality.',
+        'Java and Spring Boot system, used by a client, that collects and tracks judicial-auction properties.',
       highlights: [
-        'Automatically collects judicial-auction property listings from several public sources and cross-references them with court case data.',
+        'Automatically collects judicial-auction listings from about 10 public sources, each isolated in its own provider, so one failing source never stops the others.',
         'Duplicate detection, filters (city, neighborhood, status), tracking of auction rounds and prices, and an audit center logging every collection run.',
-        'Built for a non-technical user: opens from a desktop shortcut, runs in the browser, and has a safe shutdown that frees resources without losing the database or history.',
+        'Built for a non-technical user (desktop shortcut, runs in the browser), with CI running the quality gate on every push and PR.',
       ],
     },
   },
@@ -82,7 +94,7 @@ export const projects: Project[] = [
     year: '2026',
     title: 'Ateliê Chris Camacho',
     stack: ['React', 'Vite', 'Cloudflare Workers'],
-    links: [],
+    links: [{ label: 'Site', href: 'https://www.atelierccamacho.com.br/' }],
     pt: {
       role: 'Freelance · ateliê de cerâmica, São Paulo',
       summary:
@@ -132,57 +144,34 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 'party-landing',
-    year: '2026',
-    title: '+Party Landing Page',
-    stack: ['Angular', 'TypeScript', 'SCSS', 'Cloudflare Workers', 'GitHub Actions'],
+    id: 'plus-party',
+    year: { pt: '2026 · em andamento', en: '2026 · in progress' },
+    title: '+party',
+    stack: ['Angular 22', 'TypeScript', 'SCSS', 'Bootstrap 5', 'Supabase', 'Figma'],
     featured: true,
-    links: [{ label: 'GitHub', href: 'https://github.com/PedroLima-07/Landing-page-Party' }],
-    pt: {
-      role: 'Front-end · deploy',
-      summary:
-        'Landing page institucional de uma startup de eventos, feita em Angular com rotas para equipe, planos e sobre. Projeto em equipe, com entrega contínua em produção.',
-      highlights: [
-        'Aplicação Angular com design system próprio, header responsivo e quatro páginas secundárias.',
-        'Publicação automática na Cloudflare a cada push, via GitHub Actions e Wrangler.',
-        'Rotas do SPA servidas corretamente no reload, sem depender de arquivo de redirects.',
-      ],
-    },
-    en: {
-      role: 'Front-end · deploy',
-      summary:
-        'Institutional landing page for an events startup, built in Angular with routes for team, plans and about. Team project with continuous delivery to production.',
-      highlights: [
-        'Angular application with its own design system, responsive header and four secondary pages.',
-        'Automatic publishing to Cloudflare on every push, through GitHub Actions and Wrangler.',
-        'SPA routes served correctly on reload, without relying on a redirects file.',
-      ],
-    },
-  },
-  {
-    id: 'energy-wise',
-    year: { pt: 'mar – jun/2026', en: 'Mar – Jun 2026' },
-    title: 'Energy Wise',
-    stack: ['HTML', 'CSS', 'JavaScript', 'Bootstrap 5'],
     links: [
-      { label: 'Site', href: 'https://energywise1.netlify.app' },
-      { label: 'GitHub', href: 'https://github.com/CodeWatt-UPX3/ENERGY-WISE' },
+      {
+        label: { pt: 'Sistema', en: 'System' },
+        href: 'https://github.com/PedroLima-07/Startup-PlusParty',
+      },
+      { label: 'Landing page', href: 'https://github.com/PedroLima-07/Landing-page-Party' },
     ],
     pt: {
-      role: 'Projeto acadêmico · equipe de 5 com Scrum',
+      role: 'Startup One (FACENS) · equipe de 5 com Scrum e Trello',
       summary:
-        'Calculadora de viabilidade econômica de energia solar, feita em equipe de cinco pessoas com Scrum.',
+        'Comanda digital para bares, do pedido ao pagamento, com áreas para cliente, equipe e gestor. Projeto elogiado pelos professores da disciplina.',
       highlights: [
-        'Cálculo de VPL, TIR e payback do investimento, com o resultado exibido em gráficos.',
-        'Trabalho em equipe com Scrum e divisão de responsabilidades por sprint.',
+        'Projeto da disciplina Startup One (FACENS), em equipe de 5 com Scrum e Trello.',
+        'Um dos responsáveis pelo desenvolvimento: liderei a landing page (Angular 22, TypeScript, SCSS e Bootstrap 5) e colaboro nas demais frentes do sistema junto ao time.',
       ],
     },
     en: {
-      role: 'University team project · 5 people, Scrum',
-      summary: 'Solar energy investment calculator, built by a team of five using Scrum.',
+      role: 'Startup One course (FACENS) · team of 5 using Scrum and Trello',
+      summary:
+        'Digital tab app for bars, from ordering to payment, with areas for customers, staff and managers. Praised by the course professors.',
       highlights: [
-        'NPV, IRR and payback calculations for the investment, shown in charts.',
-        'Teamwork under Scrum, with responsibilities split per sprint.',
+        'Startup One course project (FACENS), built by a team of 5 using Scrum and Trello.',
+        'One of the developers responsible for the project: I led the landing page (Angular 22, TypeScript, SCSS and Bootstrap 5) and contribute across the rest of the system with the team.',
       ],
     },
   },
@@ -255,10 +244,12 @@ export const stackGroups: StackGroup[] = [
     items: [
       'React',
       'Angular',
+      'MongoDB',
+      'pgvector',
       'Thymeleaf',
       'Playwright',
-      'pgvector',
       'Python/FastAPI',
+      'Power BI',
       'GitHub Actions',
       'Tailwind',
       'Bootstrap',
@@ -291,8 +282,10 @@ export const stackGroups: StackGroup[] = [
       { pt: 'POO', en: 'OOP' },
       { pt: 'APIs REST', en: 'REST APIs' },
       { pt: 'Arquitetura em camadas', en: 'Layered architecture' },
+      { pt: 'Testes unitários', en: 'Unit testing' },
+      'UI/UX',
+      { pt: 'Metodologias ágeis (Scrum)', en: 'Agile (Scrum)' },
       'UML',
-      'Scrum',
       { pt: 'Estruturas de dados', en: 'Data structures' },
     ],
   },
@@ -313,7 +306,7 @@ export const content = {
     },
     hero: {
       available: 'Disponível para primeira vaga como dev júnior · CLT ou PJ',
-      role: 'Desenvolvedor Back-end Júnior · Java · Spring Boot · Node.js',
+      role: 'Desenvolvedor Júnior',
       line1: 'Construo',
       line2: 'APIs, sistemas',
       line3: 'e produtos',
@@ -330,7 +323,7 @@ export const content = {
     about: {
       eyebrow: 'Sobre',
       title: 'Quem está do outro lado do commit',
-      p1: 'Sou Danilo, desenvolvedor back-end júnior em Sorocaba. Trabalho principalmente com Java 21, Spring Boot, JPA e PostgreSQL, e também com Node.js, TypeScript e Express. Estou no 4º período de Análise e Desenvolvimento de Sistemas na FACENS, com conclusão prevista para junho de 2027.',
+      p1: 'Sou Danilo, desenvolvedor júnior em Sorocaba. Trabalho principalmente com Java 21, Spring Boot, JPA e PostgreSQL, e também com Node.js, TypeScript e Express. Estou no 4º período de Análise e Desenvolvimento de Sistemas na FACENS, com conclusão prevista para junho de 2027.',
       p2: 'Desde agosto de 2026 atuo como freelancer: escopo, prazo, desenvolvimento, deploy e suporte negociados direto com o cliente. Hoje tenho um sistema em Java e Spring em uso por um cliente, que coleta e organiza imóveis de leilão judicial, e um site no ar para um ateliê de cerâmica em São Paulo.',
       p3: 'Uso Claude Code no dia a dia e sempre reviso o código gerado. Também integro LLM via API: o AutoStore AI é um assistente RAG com pgvector que responde só com base nos dados do catálogo. Agora busco minha primeira vaga como dev júnior, CLT ou PJ.',
       facts: [
@@ -378,7 +371,6 @@ export const content = {
       eyebrow: 'Projetos',
       title: 'Trabalho selecionado',
       note: 'Trabalho freelance para clientes, teste técnico e projetos acadêmicos e em equipe, do back-end em Java a sistemas com IA.',
-      private: 'Código privado',
       viewAll: 'Ver tudo no GitHub',
     },
     path: {
@@ -395,7 +387,7 @@ export const content = {
           period: '2025 – jun/2027',
           title: 'Tecnólogo em Análise e Desenvolvimento de Sistemas',
           org: 'FACENS · Sorocaba, SP',
-          body: '4º período, conclusão prevista para junho de 2027. Fundamentos: POO, APIs REST, arquitetura em camadas, UML, Scrum e estruturas de dados.',
+          body: '4º período, conclusão prevista para junho de 2027. Fundamentos: POO, APIs REST, arquitetura em camadas, testes unitários, UI/UX, metodologias ágeis (Scrum), UML e estruturas de dados.',
         },
         {
           period: 'out/2025 – mai/2026',
@@ -436,7 +428,7 @@ export const content = {
     },
     hero: {
       available: 'Open to a first junior developer role · contractor or full-time',
-      role: 'Junior Backend Developer · Java · Spring Boot · Node.js',
+      role: 'Junior Developer',
       line1: 'I build',
       line2: 'APIs, systems',
       line3: 'and products',
@@ -453,7 +445,7 @@ export const content = {
     about: {
       eyebrow: 'About',
       title: 'Who is on the other side of the commit',
-      p1: "I'm Danilo, a junior backend developer based in Sorocaba, Brazil. I work mainly with Java 21, Spring Boot, JPA and PostgreSQL, and also with Node.js, TypeScript and Express. I'm finishing an associate degree in Systems Analysis and Development at FACENS, expected June 2027.",
+      p1: "I'm Danilo, a junior developer based in Sorocaba, Brazil. I work mainly with Java 21, Spring Boot, JPA and PostgreSQL, and also with Node.js, TypeScript and Express. I'm finishing an associate degree in Systems Analysis and Development at FACENS, expected June 2027.",
       p2: "Since August 2026 I've been freelancing: I handle scope, timeline, development, deployment and support directly with each client. Right now that means a Java/Spring system used by a client, which collects and tracks judicial-auction properties, and a live website for a ceramics studio in São Paulo.",
       p3: "I use Claude Code daily and always review the generated code. I also integrate LLMs via API: AutoStore AI is a RAG assistant on pgvector that answers only from catalog data. I'm looking for my first role as a junior developer, contractor or full-time.",
       facts: [
@@ -501,7 +493,6 @@ export const content = {
       eyebrow: 'Work',
       title: 'Selected projects',
       note: 'Freelance client work, a take-home test, and academic and team projects, from Java backends to AI systems.',
-      private: 'Private source',
       viewAll: 'See everything on GitHub',
     },
     path: {
@@ -518,7 +509,7 @@ export const content = {
           period: '2025 – Jun 2027',
           title: 'Associate Degree in Systems Analysis and Development',
           org: 'FACENS · Sorocaba, Brazil',
-          body: 'Expected June 2027. Fundamentals: OOP, REST APIs, layered architecture, UML, Scrum and data structures.',
+          body: 'Expected June 2027. Fundamentals: OOP, REST APIs, layered architecture, unit testing, UI/UX, Agile (Scrum), UML and data structures.',
         },
         {
           period: 'Oct 2025 – May 2026',

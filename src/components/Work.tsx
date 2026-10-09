@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowUpRight, Lock, Plus } from 'lucide-react';
+import { ArrowUpRight, Plus } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { profile, projects, tr, type Project } from '../data/content';
 import { Reveal, RevealWords } from './Reveal';
 
 function ProjectRow({ project, index }: { project: Project; index: number }) {
-  const { t, lang } = useSite();
+  const { lang } = useSite();
   const [open, setOpen] = useState(index === 0);
   const copy = project[lang];
   const panelId = `project-panel-${project.id}`;
@@ -25,12 +25,6 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             <span className="font-display text-[1.85rem] leading-tight text-ink transition-colors duration-300 group-hover:text-accent md:text-[2.5rem]">
               {tr(project.title, lang)}
             </span>
-            {project.private && (
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 font-mono text-[0.6rem] tracking-[0.1em] text-muted uppercase">
-                <Lock size={10} />
-                {t.work.private}
-              </span>
-            )}
           </span>
           <span className="mt-1.5 block font-mono text-[0.7rem] tracking-[0.08em] text-muted">
             {/* O ano tem coluna própria no desktop; no celular ela não cabe,
