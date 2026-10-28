@@ -47,7 +47,20 @@
   --color-accent-soft: var(--accent-soft);
 
   --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* A serifa grande é a personalidade do site: o nome na abertura e os
+     títulos das seções e dos projetos. O resto do texto fica no Plex. */
+  --text-display: clamp(3.6rem, 13vw, 9.5rem);
+  --text-display--line-height: 0.9;
+  --text-display--letter-spacing: -0.03em;
+
+  --text-title: clamp(2.6rem, 6vw, 4.25rem);
+  --text-title--line-height: 1;
+  --text-title--letter-spacing: -0.02em;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* --------------------------------------------------------------- */
@@ -71,6 +84,8 @@ html {
   *,
   *::before,
   *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
@@ -110,7 +125,7 @@ summary {
 @utility container-page {
   width: 100%;
   margin-inline: auto;
-  max-width: 64rem;
+  max-width: 76rem;
   --gutter: 1.25rem;
   /* env() cobre o entalhe e as bordas arredondadas quando o aparelho esta
      deitado; em telas retas os valores sao zero e vale a margem normal. */
@@ -121,8 +136,74 @@ summary {
 
 @media (min-width: 768px) {
   .container-page {
-    --gutter: 2rem;
+    --gutter: 2.5rem;
   }
+}
+
+/* ---------------------------------------------------------------
+   Movimento. A abertura monta o nome linha a linha; o resto entra
+   uma vez, ao aparecer na tela. O conteúdo só começa escondido
+   quando o JavaScript liga a classe js-reveal no <html> (main.tsx),
+   e ela não é ligada com "reduzir movimento": sem script ou sem
+   animação, tudo já nasce no lugar.
+   --------------------------------------------------------------- */
+
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  display: block;
+  animation: rise 1s var(--ease-out-soft) both;
+  animation-delay: var(--delay, 0s);
+}
+
+.fade-up {
+  animation: fade-up 0.9s var(--ease-out-soft) both;
+  animation-delay: var(--delay, 0s);
+}
+
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s var(--ease-out-soft),
+    transform 0.8s var(--ease-out-soft);
+  transition-delay: var(--delay, 0s);
+}
+
+.js-reveal .reveal.is-shown {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sublinhado que cresce da esquerda. */
+@utility link-grow {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s var(--ease-out-soft);
+}
+.link-grow:hover,
+.link-grow:focus-visible {
+  background-size: 100% 1px;
 }
 
 /* ---------------------------------------------------------------
@@ -132,14 +213,15 @@ summary {
 
 @utility tap {
   transition:
-    border-color 0.15s ease,
-    background-color 0.15s ease,
-    color 0.15s ease;
+    transform 0.25s var(--ease-out-soft),
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 @media (hover: none) {
   .tap:active {
-    background-color: var(--surface);
+    transform: scale(0.97);
   }
 }
 

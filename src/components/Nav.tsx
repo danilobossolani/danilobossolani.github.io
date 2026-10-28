@@ -81,18 +81,18 @@ export function Nav() {
       </a>
 
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b border-line bg-bg transition-transform duration-200 ${
+        className={`fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md transition-transform duration-300 ${
           hidden && !open ? 'max-md:-translate-y-full' : 'translate-y-0'
         }`}
       >
         <div className="container-page flex h-14 items-center justify-between gap-4">
-          <a href="#top" className="text-[0.95rem] font-semibold whitespace-nowrap text-ink">
+          <a href="#top" className="font-display text-[1.35rem] whitespace-nowrap text-ink">
             {profile.name}
           </a>
 
           <nav className="hidden items-center gap-7 md:flex" aria-label={t.nav.menu}>
             {sections.map((id) => (
-              <a key={id} href={`#${id}`} className="text-[0.9rem] text-muted transition-colors hover:text-ink">
+              <a key={id} href={`#${id}`} className="link-grow text-[0.9rem] text-muted transition-colors hover:text-ink">
                 {t.nav[id]}
               </a>
             ))}

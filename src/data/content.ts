@@ -47,6 +47,8 @@ export type Project = {
   title: string;
   stack: string[];
   links: { type: 'code' | 'site'; label: Localized; href: string }[];
+  /** Print real do projeto, em public/projetos/<shot>-{640,1200}.webp. */
+  shot: { file: string; alt: Localized };
   pt: ProjectCopy;
   en: ProjectCopy;
 };
@@ -56,6 +58,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: 'judicial-pipeline',
+    shot: { file: 'judicial', alt: { pt: 'Painel do Judicial Property Pipeline com os imóveis monitorados', en: 'Judicial Property Pipeline dashboard listing the monitored properties' } },
     year: '2026',
     title: 'Judicial Property Pipeline',
     stack: ['Java 21', 'Spring Boot', 'JPA', 'Flyway', 'PostgreSQL', 'Docker', 'Thymeleaf', 'Playwright'],
@@ -89,6 +92,7 @@ export const projects: Project[] = [
   },
   {
     id: 'autostore-ai',
+    shot: { file: 'autostore', alt: { pt: 'Catálogo de carros da AutoStore AI', en: 'AutoStore AI car catalog' } },
     year: '2026',
     title: 'AutoStore AI',
     stack: ['Node.js', 'TypeScript', 'Express', 'PostgreSQL', 'pgvector', 'Gemini API'],
@@ -121,10 +125,16 @@ export const projects: Project[] = [
   },
   {
     id: 'plus-party',
+    shot: { file: 'plusparty', alt: { pt: 'Landing page do +party', en: '+party landing page' } },
     year: { pt: '2026 · em andamento', en: '2026 · in progress' },
     title: '+party',
     stack: ['Angular 22', 'TypeScript', 'SCSS', 'Bootstrap 5', 'Supabase', 'Figma'],
     links: [
+      {
+        type: 'site',
+        label: { pt: 'Ver a landing page', en: 'View landing page' },
+        href: 'https://party-landing.danbossolani.workers.dev/',
+      },
       {
         type: 'code',
         label: { pt: 'Código do sistema', en: 'System code' },
@@ -157,6 +167,7 @@ export const projects: Project[] = [
   },
   {
     id: 'atelier-chris',
+    shot: { file: 'atelier', alt: { pt: 'Página inicial do site do Ateliê Chris Camacho', en: 'Ateliê Chris Camacho website home page' } },
     year: '2026',
     title: 'Ateliê Chris Camacho',
     stack: ['React', 'Vite', 'Cloudflare Workers'],

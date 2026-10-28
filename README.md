@@ -4,14 +4,16 @@ Site pessoal em React, bilíngue (pt-BR / inglês), com tema escuro e claro.
 Publicado em <https://danilobossolani.github.io>.
 
 O conteúdo segue os currículos em `public/` (PT e EN), que são a fonte
-oficial: nada no site vai além do que está neles. A identidade visual também é
-a do currículo: IBM Plex Sans, IBM Plex Mono só em detalhes, e verde `#0f6b58`.
+oficial: nada no site vai além do que está neles. A identidade visual: Instrument
+Serif grande nos títulos, IBM Plex Sans no texto, IBM Plex Mono só em detalhes,
+verde `#0f6b58` e prints reais de cada projeto em `public/projetos/`.
 
 ## Stack
 
 - **React 19** + **TypeScript** com **Vite**
 - **Tailwind CSS v4** — tokens de cor em `src/index.css`, um par por tema
-- **IBM Plex Sans** e **IBM Plex Mono** servidas pelo próprio site (`@fontsource`), sem Google Fonts
+- **Instrument Serif**, **IBM Plex Sans** e **IBM Plex Mono** servidas pelo próprio site (`@fontsource`), sem Google Fonts
+- Animações só em CSS (`.rise`, `.fade-up`, `.reveal` em `src/index.css`), desligadas com "reduzir movimento"
 - **lucide-react** para os ícones
 - **sharp** para gerar a capa de compartilhamento
 - **GitHub Pages** (via GitHub Actions) para a publicação

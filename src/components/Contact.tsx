@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowUpRight, Check, Copy, Download } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { profile } from '../data/content';
+import { Reveal } from './Reveal';
 import { Section } from './Section';
 import { WhatsAppIcon } from './WhatsAppIcon';
 
@@ -24,85 +25,52 @@ export function Contact() {
     }
   };
 
-  const channels = [
-    { label: 'LinkedIn', value: profile.linkedinLabel, href: profile.linkedin },
-    { label: 'GitHub', value: profile.githubLabel, href: profile.github },
-  ];
-
-  const rowClass = 'grid gap-1 py-3.5 sm:grid-cols-[10rem_minmax(0,1fr)] sm:items-center sm:gap-6';
-  const labelClass = 'text-[0.92rem] font-semibold text-muted';
+  const pill =
+    'tap inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-2.5 text-[0.95rem] font-medium text-ink hover:-translate-y-0.5 hover:border-accent hover:text-accent';
 
   return (
     <Section id="contact" title={t.contact.label}>
-      <p className="max-w-[44rem] text-[1rem] leading-relaxed text-ink">{t.contact.body}</p>
+      <Reveal as="p" className="max-w-[40rem] text-[1.1rem] leading-relaxed text-muted">
+        {t.contact.body}
+      </Reveal>
 
-      <ul className="mt-6 max-w-2xl divide-y divide-line border-y border-line">
-        <li className={rowClass}>
-          <span className={labelClass}>{t.contact.emailLabel}</span>
-          <span className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <a
-              href={`mailto:${profile.email}`}
-              className="text-[0.98rem] font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-accent"
-            >
-              {profile.email}
-            </a>
-            <button
-              type="button"
-              onClick={copyEmail}
-              className="tap inline-flex items-center gap-1.5 rounded-md border border-line px-2.5 py-1 text-[0.8rem] text-muted hover:text-ink"
-            >
-              {copied ? <Check size={13} className="text-accent" /> : <Copy size={13} />}
-              {copied ? t.contact.copied : t.contact.copy}
-            </button>
-          </span>
-        </li>
+      <Reveal delay={0.08} className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <a
+          href={`mailto:${profile.email}`}
+          className="link-grow font-display text-[clamp(2rem,6.5vw,4.5rem)] leading-[1.1] break-all text-ink hover:text-accent"
+        >
+          {profile.email}
+        </a>
+        <button
+          type="button"
+          onClick={copyEmail}
+          className="tap inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-[0.85rem] text-muted hover:text-ink"
+        >
+          {copied ? <Check size={14} className="text-accent" /> : <Copy size={14} />}
+          {copied ? t.contact.copied : t.contact.copy}
+        </button>
+      </Reveal>
 
-        <li className={rowClass}>
-          <span className={labelClass}>{t.contact.phoneLabel}</span>
-          <a
-            href={profile.whatsapp}
-            target="_blank"
-            rel="noreferrer"
-            className="tap inline-flex items-center gap-2 justify-self-start rounded-md border border-line-strong px-3 py-1.5 text-[0.9rem] font-medium text-ink hover:border-accent hover:text-accent"
-          >
-            <WhatsAppIcon size={16} className="text-accent" />
-            {t.contact.whatsapp}
+      <Reveal delay={0.16} className="mt-10 flex flex-wrap gap-3">
+        <a href={profile.whatsapp} target="_blank" rel="noreferrer" className={pill}>
+          <WhatsAppIcon size={17} className="text-accent" />
+          {t.contact.whatsapp}
+        </a>
+        <a href={profile.linkedin} target="_blank" rel="noreferrer" className={pill}>
+          LinkedIn
+          <ArrowUpRight size={15} className="text-muted" />
+        </a>
+        <a href={profile.github} target="_blank" rel="noreferrer" className={pill}>
+          GitHub
+          <ArrowUpRight size={15} className="text-muted" />
+        </a>
+        {(['pt', 'en'] as const).map((l) => (
+          <a key={l} href={profile.cv[l]} download className={pill}>
+            <Download size={15} className="text-muted" />
+            {l === 'pt' ? t.contact.cvPt : t.contact.cvEn}
           </a>
-        </li>
-
-        {channels.map((channel) => (
-          <li key={channel.label} className={rowClass}>
-            <span className={labelClass}>{channel.label}</span>
-            <a
-              href={channel.href}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 justify-self-start text-[0.98rem] text-ink underline decoration-line-strong underline-offset-4 hover:decoration-accent"
-            >
-              {channel.value}
-              <ArrowUpRight size={14} className="text-muted" />
-            </a>
-          </li>
         ))}
-
-        <li className={rowClass}>
-          <span className={labelClass}>{t.contact.cvLabel}</span>
-          <span className="flex gap-2">
-            {(['pt', 'en'] as const).map((l) => (
-              <a
-                key={l}
-                href={profile.cv[l]}
-                download
-                aria-label={l === 'pt' ? t.contact.cvPt : t.contact.cvEn}
-                className="tap inline-flex items-center gap-1.5 rounded-md border border-line-strong px-3 py-1.5 font-mono text-[0.8rem] text-ink hover:border-accent hover:text-accent"
-              >
-                <Download size={13} className="text-muted" />
-                {l.toUpperCase()}
-              </a>
-            ))}
-          </span>
-        </li>
-      </ul>
+      </Reveal>
     </Section>
   );
 }

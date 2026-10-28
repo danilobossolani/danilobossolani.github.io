@@ -1,15 +1,28 @@
 import type { ReactNode } from 'react';
+import { Reveal } from './Reveal';
 
 /**
- * Bloco de seção com a cara do currículo: um fio em cima e, no desktop, o
- * título numa coluna à esquerda. No celular o título vai por cima.
+ * Seção com o título grande na serifa. `band` pinta o fundo da faixa
+ * inteira, para separar os blocos sem precisar de fios.
  */
-export function Section({ id, title, children }: { id?: string; title: string; children: ReactNode }) {
+export function Section({
+  id,
+  title,
+  band = false,
+  children,
+}: {
+  id?: string;
+  title: string;
+  band?: boolean;
+  children: ReactNode;
+}) {
   return (
-    <section id={id} className="container-page scroll-mt-14">
-      <div className="grid gap-5 border-t border-line py-10 md:grid-cols-[10rem_minmax(0,1fr)] md:gap-10 md:py-14">
-        <h2 className="text-[1.05rem] font-semibold text-ink">{title}</h2>
-        <div className="min-w-0">{children}</div>
+    <section id={id} className={`scroll-mt-14 ${band ? 'bg-bg-elevated' : ''}`}>
+      <div className="container-page py-20 md:py-28">
+        <Reveal as="h2" className="font-display text-title text-ink">
+          {title}
+        </Reveal>
+        <div className="mt-10 min-w-0 md:mt-14">{children}</div>
       </div>
     </section>
   );
