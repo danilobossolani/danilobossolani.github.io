@@ -21,11 +21,11 @@ function Shot({ project, flip }: { project: Project; flip: boolean }) {
           <span className="size-2.5 rounded-full bg-line-strong" />
         </div>
         <img
-          src={`${base}-1200.webp`}
-          srcSet={`${base}-640.webp 640w, ${base}-1200.webp 1200w`}
+          src={`${base}-1600.webp`}
+          srcSet={`${base}-800.webp 800w, ${base}-1600.webp 1600w`}
           sizes="(min-width: 1024px) 36rem, 100vw"
-          width={1200}
-          height={750}
+          width={1600}
+          height={1000}
           loading="lazy"
           decoding="async"
           alt={tr(project.shot.alt, lang)}

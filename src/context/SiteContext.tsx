@@ -42,7 +42,7 @@ export function SiteProvider({ children }: { children: ReactNode }) {
     const fromDom = document.documentElement.lang;
     if (fromDom.startsWith('pt')) return 'pt';
     if (fromDom.startsWith('en')) return 'en';
-    return readStored('lang', ['pt', 'en'] as const, 'pt');
+    return 'pt';
   });
 
   useEffect(() => {
@@ -64,7 +64,8 @@ export function SiteProvider({ children }: { children: ReactNode }) {
     document.title = content[lang].meta.title;
     document.querySelector('meta[name="description"]')?.setAttribute('content', content[lang].meta.description);
     try {
-      localStorage.setItem('lang', lang);
+      // Na sessão e não no aparelho: a próxima visita volta a abrir em português.
+      sessionStorage.setItem('lang', lang);
     } catch {
       /* idem */
     }

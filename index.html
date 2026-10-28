@@ -88,8 +88,10 @@
           var meta = document.querySelector('meta[name="theme-color"]');
           if (meta) meta.setAttribute('content', t === 'dark' ? '#0F1513' : '#FFFFFF');
 
-          var l = localStorage.getItem('lang');
-          // Sempre abre em português (inclusive para o Google); inglês só pelo botão.
+          // Sempre abre em português (inclusive para o Google); o inglês
+          // escolhido no botão vale só enquanto a aba estiver aberta.
+          localStorage.removeItem('lang');
+          var l = sessionStorage.getItem('lang');
           if (l !== 'pt' && l !== 'en') l = 'pt';
           document.documentElement.lang = l === 'pt' ? 'pt-BR' : 'en';
         } catch (e) {

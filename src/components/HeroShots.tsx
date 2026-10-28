@@ -38,9 +38,11 @@ export function HeroShots({ className = '' }: { className?: string }) {
                 <span className="size-1.5 rounded-full bg-line-strong" />
               </span>
               <img
-                src={`/projetos/${project.shot.file}-640.webp`}
-                width={640}
-                height={400}
+                src={`/projetos/${project.shot.file}-800.webp`}
+                srcSet={`/projetos/${project.shot.file}-800.webp 800w, /projetos/${project.shot.file}-1600.webp 1600w`}
+                sizes="(min-width: 1024px) 21rem, 60vw"
+                width={800}
+                height={500}
                 alt={tr(project.shot.alt, lang)}
                 fetchPriority="low"
                 decoding="async"

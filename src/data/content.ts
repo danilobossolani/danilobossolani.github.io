@@ -47,7 +47,7 @@ export type Project = {
   title: string;
   stack: string[];
   links: { type: 'code' | 'site'; label: Localized; href: string }[];
-  /** Print real do projeto, em public/projetos/<shot>-{640,1200}.webp. */
+  /** Print real do projeto, em public/projetos/<shot>-{800,1600}.webp (prints em 2x). */
   shot: { file: string; alt: Localized };
   pt: ProjectCopy;
   en: ProjectCopy;
@@ -187,6 +187,34 @@ export const projects: Project[] = [
       did: [
         'WhatsApp contact using pre-filled messages.',
         'Static site with a strict CSP, deployed on Cloudflare.',
+      ],
+    },
+  },
+  {
+    id: 'serralheria-venancio',
+    shot: { file: 'serralheria', alt: { pt: 'Página inicial do site da Serralheria Venâncio', en: 'Serralheria Venâncio website home page' } },
+    year: '2026',
+    title: 'Serralheria Venâncio',
+    stack: ['HTML', 'CSS', 'JavaScript', 'Cloudflare Workers'],
+    links: [{ type: 'site', label: 'serralheriavenancioipe.com.br', href: 'https://serralheriavenancioipe.com.br/' }],
+    pt: {
+      kind: 'Freelance para uma serralheria em Iperó, SP',
+      problem:
+        'Site da serralheria com serviços, portfólio de fotos reais dos trabalhos, avaliações do Google e pedido de orçamento.',
+      did: [
+        'Portfólio com filtros por tipo de serviço e lightbox com zoom e swipe no celular.',
+        'Formulário de orçamento que monta a mensagem e abre o WhatsApp da serralheria.',
+        'HTML, CSS e JavaScript puros, sem build, com CSP restritiva e deploy na Cloudflare.',
+      ],
+    },
+    en: {
+      kind: 'Freelance for a metalwork shop in Iperó, Brazil',
+      problem:
+        'Website for a metalwork shop with its services, a gallery of real job photos, Google reviews and quote requests.',
+      did: [
+        'Gallery with filters by service and a lightbox with zoom and swipe on mobile.',
+        'Quote form that writes the message and opens the shop’s WhatsApp.',
+        'Plain HTML, CSS and JavaScript with no build step, a strict CSP, deployed on Cloudflare.',
       ],
     },
   },
