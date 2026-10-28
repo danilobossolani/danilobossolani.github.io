@@ -11,8 +11,9 @@
     "deploy:cloudflare": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/ibm-plex-sans": "^5.2.8",
     "lucide-react": "^0.544.0",
-    "motion": "^12.23.12",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

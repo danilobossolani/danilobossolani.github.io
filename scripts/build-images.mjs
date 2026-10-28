@@ -1,10 +1,10 @@
 // Ponto de entrada de `npm run images`.
 //
 // A capa do preview tem texto, e quem desenha texto dentro do sharp e o
-// fontconfig do sistema — que nao conhece Instrument Serif nem JetBrains Mono.
-// Entao apontamos o fontconfig para assets-src/fonts antes de chamar os
-// geradores. A variavel precisa existir quando o sharp carrega, por isso os
-// scripts rodam em processos filhos em vez de um import daqui.
+// fontconfig do sistema — que nao conhece IBM Plex Sans nem IBM Plex Mono.
+// Entao apontamos o fontconfig para assets-src/fonts antes de chamar o
+// gerador. A variavel precisa existir quando o sharp carrega, por isso o
+// script roda num processo filho em vez de um import daqui.
 import { spawnSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -31,7 +31,7 @@ writeFileSync(
 
 const env = { ...process.env, FONTCONFIG_FILE: posix(confPath) };
 
-for (const script of ['scripts/images.mjs', 'scripts/og.mjs']) {
+for (const script of ['scripts/og.mjs']) {
   const run = spawnSync(process.execPath, [script], { cwd: root, env, stdio: 'inherit' });
   if (run.status !== 0) process.exit(run.status ?? 1);
 }

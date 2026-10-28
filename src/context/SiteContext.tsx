@@ -49,7 +49,7 @@ export function SiteProvider({ children }: { children: ReactNode }) {
     document.documentElement.dataset.theme = theme;
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', theme === 'dark' ? '#0A0A0A' : '#FAF9F7');
+      ?.setAttribute('content', theme === 'dark' ? '#0F1513' : '#FFFFFF');
     try {
       localStorage.setItem('theme', theme);
     } catch {
@@ -59,6 +59,10 @@ export function SiteProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    // Título e descrição acompanham o idioma da página, para a aba e para o
+    // Google, que renderiza o JavaScript antes de indexar.
+    document.title = content[lang].meta.title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', content[lang].meta.description);
     try {
       localStorage.setItem('lang', lang);
     } catch {

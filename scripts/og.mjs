@@ -1,112 +1,88 @@
 // Gera a capa que aparece quando o link e compartilhado (WhatsApp, LinkedIn, X).
-// 1200x630 e a proporcao que todos eles recortam sem cortar nada.
+// Mesma identidade do curriculo: fundo branco, IBM Plex, fio escuro e verde.
+// 1200x630 e a proporcao que todos eles recortam sem cortar nada; a versao
+// quadrada tem layout proprio, porque um recorte cortaria o nome.
 // Rode com `npm run images`.
 import sharp from 'sharp';
 
-const W = 1200;
-const H = 630;
-const PAD = 76;
+const BG = '#ffffff';
+const INK = '#16201d';
+const MUTED = '#55605b';
+const ACCENT = '#0f6b58';
+const ACCENT_SOFT = '#e8f2ef';
 
-const BG = '#0a0a0a';
-const INK = '#fafafa';
-const SOFT = '#b4b4b4';
-const MUTED = '#7a7a7a';
-const LINE = '#262626';
-const ACCENT = '#ff5c35';
+const SANS = 'IBM Plex Sans';
+const MONO = 'IBM Plex Mono';
 
+const NAME = 'Danilo Yamazaki Bossolani';
+const ROLE = 'Desenvolvedor Júnior · Java · Spring Boot · IA aplicada';
+const STACK = 'Java 21 · Spring Boot · PostgreSQL · Node.js · TypeScript';
+const WHERE = 'Sorocaba, SP · remoto · disponível para CLT ou PJ';
 const SITE = 'danilobossolani.github.io';
 
-// ---------------------------------------------------------------- foto
-// Coluna da direita, cortada em retrato e esmaecida para dentro do fundo.
-const photoW = 560;
+const save = (svg, file) =>
+  sharp(Buffer.from(svg)).jpeg({ quality: 90, progressive: true, mozjpeg: true }).toFile(file);
 
-// Recorte manual em vez de automatico: o rosto precisa cair na metade direita
-// da coluna, senao o esmaecimento da esquerda come metade dele.
-const photo = await sharp('assets-src/danilo-original.jpg')
-  .extract({ left: 120, top: 270, width: 880, height: 990 })
-  .resize(photoW, H, { fit: 'cover' })
-  .grayscale()
-  .modulate({ brightness: 1.06 })
-  .linear(1.12, -12)
-  .toBuffer();
+// ---------------------------------------------------------------- 1200x630
+{
+  const W = 1200;
+  const H = 630;
+  const X = 80;
 
-// Mascara: transparente na borda esquerda, opaca a partir de ~45% da coluna.
-const fade = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${photoW}" height="${H}">
-  <defs>
-    <linearGradient id="f" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
-      <stop offset="0.45" stop-color="#fff" stop-opacity="0.85"/>
-      <stop offset="0.75" stop-color="#fff" stop-opacity="1"/>
-    </linearGradient>
-  </defs>
-  <rect width="${photoW}" height="${H}" fill="url(#f)"/>
-</svg>`);
-
-const photoFaded = await sharp(photo)
-  .composite([{ input: fade, blend: 'dest-in' }])
-  .png()
-  .toBuffer();
-
-// ---------------------------------------------------------------- fundo
-const backdrop = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
-  <defs>
-    <radialGradient id="glow" cx="0.2" cy="0.12" r="0.7">
-      <stop offset="0" stop-color="${ACCENT}" stop-opacity="0.22"/>
-      <stop offset="1" stop-color="${ACCENT}" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="grain">
-      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/>
-    </filter>
-  </defs>
+  await save(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
   <rect width="${W}" height="${H}" fill="${BG}"/>
-  <rect width="${W}" height="${H}" fill="url(#glow)"/>
-  <rect width="${W}" height="${H}" filter="url(#grain)" opacity="0.035"/>
-</svg>`);
 
-// ---------------------------------------------------------------- texto
-// Fica por cima da foto, entao vive todo dentro dos 640px da esquerda.
-const baseline = { name: 268, tagline: 340, sub: 392 };
+  <text x="${X}" y="200" font-family="${SANS}" font-weight="700" font-size="68"
+        letter-spacing="-0.5" fill="${INK}">${NAME}</text>
+  <text x="${X}" y="256" font-family="${SANS}" font-weight="600" font-size="30"
+        fill="${ACCENT}">${ROLE}</text>
 
-const overlay = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
-  <!-- Fio de progresso do topo do site, repetido aqui como assinatura. -->
-  <rect x="0" y="0" width="${W}" height="4" fill="${ACCENT}"/>
+  <!-- O fio grosso sob o cabecalho, como no curriculo. -->
+  <rect x="${X}" y="300" width="${W - 2 * X}" height="4" fill="${INK}"/>
 
-  <!-- Selo de disponibilidade. -->
-  <circle cx="${PAD + 7}" cy="${150}" r="6" fill="${ACCENT}"/>
-  <text x="${PAD + 26}" y="${156}" font-family="JetBrains Mono" font-size="19"
-        letter-spacing="3.4" fill="${MUTED}">DESENVOLVEDOR JÚNIOR</text>
+  <text x="${X}" y="370" font-family="${MONO}" font-size="24" fill="${ACCENT}">${STACK}</text>
+  <text x="${X}" y="418" font-family="${SANS}" font-size="26" fill="${MUTED}">${WHERE}</text>
 
-  <text x="${PAD}" y="${baseline.name}" font-family="Instrument Serif" font-size="92"
-        letter-spacing="-1.5" fill="${INK}">Danilo Bossolani</text>
+  <rect x="${X}" y="490" width="6" height="64" fill="${ACCENT}"/>
+  <rect x="${X + 6}" y="490" width="${W - 2 * X - 6}" height="64" fill="${ACCENT_SOFT}"/>
+  <text x="${X + 30}" y="531" font-family="${MONO}" font-weight="500" font-size="24"
+        fill="${INK}">${SITE}</text>
+</svg>`,
+    'public/og.jpg',
+  );
+}
 
-  <text x="${PAD}" y="${baseline.tagline}" font-family="Instrument Serif" font-size="46"
-        font-style="italic" fill="${ACCENT}">APIs, dados e sistemas com IA</text>
+// ---------------------------------------------------------------- 630x630
+{
+  const S = 630;
+  const X = 56;
 
-  <text x="${PAD}" y="${baseline.sub}" font-family="Inter" font-size="23"
-        fill="${SOFT}">Java · Spring Boot · PostgreSQL · Node.js</text>
+  await save(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${S}" height="${S}">
+  <rect width="${S}" height="${S}" fill="${BG}"/>
 
-  <line x1="${PAD}" y1="470" x2="${PAD + 470}" y2="470" stroke="${LINE}" stroke-width="1"/>
+  <text x="${X}" y="170" font-family="${SANS}" font-weight="700" font-size="56"
+        letter-spacing="-0.5" fill="${INK}">Danilo Yamazaki</text>
+  <text x="${X}" y="236" font-family="${SANS}" font-weight="700" font-size="56"
+        letter-spacing="-0.5" fill="${INK}">Bossolani</text>
 
-  <text x="${PAD}" y="${522}" font-family="JetBrains Mono" font-size="21"
-        letter-spacing="1.2" fill="${INK}">${SITE}</text>
+  <text x="${X}" y="296" font-family="${SANS}" font-weight="600" font-size="28"
+        fill="${ACCENT}">Desenvolvedor Júnior</text>
+  <text x="${X}" y="336" font-family="${SANS}" font-weight="600" font-size="28"
+        fill="${ACCENT}">Java · Spring Boot · IA aplicada</text>
 
-  <text x="${PAD}" y="${562}" font-family="JetBrains Mono" font-size="17"
-        letter-spacing="2.6" fill="${MUTED}">SOROCABA · SP · BRASIL</text>
-</svg>`);
+  <rect x="${X}" y="376" width="${S - 2 * X}" height="4" fill="${INK}"/>
 
-await sharp(backdrop)
-  .composite([
-    { input: photoFaded, left: W - photoW, top: 0 },
-    { input: overlay, left: 0, top: 0 },
-  ])
-  .jpeg({ quality: 90, progressive: true, mozjpeg: true })
-  .toFile('public/og.jpg');
+  <text x="${X}" y="430" font-family="${SANS}" font-size="22" fill="${MUTED}">Sorocaba, SP · remoto · CLT ou PJ</text>
 
-// Versao quadrada: alguns apps de mensagem recortam o preview em 1:1, e o
-// recorte automatico deles cortaria o nome pela metade.
-await sharp('public/og.jpg')
-  .extract({ left: 0, top: 0, width: H, height: H })
-  .jpeg({ quality: 90, progressive: true, mozjpeg: true })
-  .toFile('public/og-square.jpg');
+  <rect x="${X}" y="490" width="5" height="56" fill="${ACCENT}"/>
+  <rect x="${X + 5}" y="490" width="${S - 2 * X - 5}" height="56" fill="${ACCENT_SOFT}"/>
+  <text x="${X + 24}" y="526" font-family="${MONO}" font-weight="500" font-size="21"
+        fill="${INK}">${SITE}</text>
+</svg>`,
+    'public/og-square.jpg',
+  );
+}
 
 console.log('capa: ok');

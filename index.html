@@ -7,15 +7,43 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://danilobossolani.github.io/" />
 
-    <title>Danilo Bossolani · Desenvolvedor Júnior</title>
+    <title>Danilo Bossolani · Desenvolvedor Júnior · Java · Spring Boot</title>
     <meta
       name="description"
-      content="Desenvolvedor júnior em Java e Spring Boot com PostgreSQL, também com Node.js e TypeScript. Freelancer desde agosto de 2026. Sorocaba, SP."
+      content="Desenvolvedor júnior em Java e Spring Boot com PostgreSQL, Node.js e TypeScript. Freelancer desde agosto de 2026, em Sorocaba, SP. Disponível para CLT ou PJ."
     />
     <meta name="author" content="Danilo Yamazaki Bossolani" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Diz ao Google quem é a pessoa do site e quais perfis são dela, para
+         que a busca pelo nome junte site, LinkedIn e GitHub. Sem telefone:
+         o número fica só atrás do botão do WhatsApp. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Danilo Yamazaki Bossolani",
+        "alternateName": ["Danilo Bossolani", "Danilo Yamazaki"],
+        "jobTitle": "Desenvolvedor Júnior",
+        "description": "Desenvolvedor júnior em Java e Spring Boot com PostgreSQL, também com Node.js e TypeScript.",
+        "url": "https://danilobossolani.github.io/",
+        "email": "mailto:danbossolani@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Sorocaba",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        },
+        "knowsAbout": ["Java", "Spring Boot", "PostgreSQL", "Node.js", "TypeScript", "Docker"],
+        "sameAs": [
+          "https://www.linkedin.com/in/danilobossolani",
+          "https://github.com/danilobossolani"
+        ]
+      }
+    </script>
 
     <!-- A barra do navegador no celular acompanha o tema do site. -->
-    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="theme-color" content="#0F1513" />
     <meta name="color-scheme" content="dark light" />
     <meta name="apple-mobile-web-app-title" content="Danilo Bossolani" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -27,31 +55,25 @@
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:url" content="https://danilobossolani.github.io/" />
-    <meta property="og:title" content="Danilo Bossolani · Desenvolvedor Júnior" />
+    <meta property="og:title" content="Danilo Bossolani · Desenvolvedor Júnior · Java · Spring Boot · IA aplicada" />
     <meta
       property="og:description"
       content="Java, Spring Boot, PostgreSQL, Node.js e TypeScript. Projetos, experiência e currículo."
     />
-    <meta property="og:image" content="https://danilobossolani.github.io/og.jpg" />
+    <meta property="og:image" content="https://danilobossolani.github.io/og.jpg?v=2" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Danilo Bossolani, desenvolvedor júnior" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Danilo Bossolani · Desenvolvedor Júnior" />
+    <meta name="twitter:title" content="Danilo Bossolani · Desenvolvedor Júnior · Java · Spring Boot · IA aplicada" />
     <meta
       name="twitter:description"
       content="Java, Spring Boot, PostgreSQL, Node.js e TypeScript. Projetos, experiência e currículo."
     />
-    <meta name="twitter:image" content="https://danilobossolani.github.io/og.jpg" />
+    <meta name="twitter:image" content="https://danilobossolani.github.io/og.jpg?v=2" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
 
     <script>
       // Aplica tema e idioma antes da primeira pintura, para não haver flash.
@@ -63,12 +85,11 @@
           }
           document.documentElement.dataset.theme = t;
           var meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.setAttribute('content', t === 'dark' ? '#0A0A0A' : '#FAF9F7');
+          if (meta) meta.setAttribute('content', t === 'dark' ? '#0F1513' : '#FFFFFF');
 
           var l = localStorage.getItem('lang');
-          if (l !== 'pt' && l !== 'en') {
-            l = (navigator.language || 'pt').toLowerCase().startsWith('pt') ? 'pt' : 'en';
-          }
+          // Sempre abre em português (inclusive para o Google); inglês só pelo botão.
+          if (l !== 'pt' && l !== 'en') l = 'pt';
           document.documentElement.lang = l === 'pt' ? 'pt-BR' : 'en';
         } catch (e) {
           /* modo privado: segue com o padrão do HTML */

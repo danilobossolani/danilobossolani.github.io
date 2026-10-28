@@ -1,3 +1,6 @@
+// Todo o texto do site sai dos currículos em public/ (PT e EN). Nada aqui
+// pode ir além do que está neles.
+
 export type Lang = 'pt' | 'en';
 
 /** Um rotulo que ou e igual nos dois idiomas, ou traz uma versao para cada. */
@@ -11,109 +14,77 @@ export const profile = {
   name: 'Danilo Bossolani',
   fullName: 'Danilo Yamazaki Bossolani',
   email: 'danbossolani@gmail.com',
-  phone: '+55 15 99119-7670',
-  phoneHref: '+5515991197670',
+  // O número não aparece na tela: o site mostra só o botão do WhatsApp.
+  whatsapp: 'https://wa.me/5515991197670',
   location: {
     pt: 'Sorocaba, SP · remoto, híbrido ou presencial',
     en: 'Sorocaba, Brazil · remote (GMT-3)',
   } as Localized,
   github: 'https://github.com/danilobossolani',
-  githubHandle: 'danilobossolani',
+  githubLabel: 'github.com/danilobossolani',
   linkedin: 'https://linkedin.com/in/danilobossolani',
-  linkedinHandle: 'danilobossolani',
+  linkedinLabel: 'linkedin.com/in/danilobossolani',
   // Os PDFs moram em public/, entao sao servidos na raiz do site.
   cv: {
     pt: '/Curriculo_Danilo_Bossolani_PT.pdf',
     en: '/Resume_Danilo_Bossolani_EN.pdf',
   },
-  // Retrato do "Sobre". As larguras sao geradas por `npm run images` a partir
-  // de assets-src/danilo-original.png; o srcset deixa o navegador escolher.
-  photo: {
-    fallback: '/img/danilo-800.jpg',
-    widths: [480, 640, 800, 1024, 1200],
-    intrinsic: { width: 1200, height: 1500 },
-  },
+};
+
+type ProjectCopy = {
+  kind: string;
+  /** Que problema o projeto resolve, em uma frase. */
+  problem: string;
+  /** O que eu fiz nele. */
+  did: string[];
+  /** Dado que merece destaque visual no card. */
+  highlight?: string;
 };
 
 export type Project = {
   id: string;
   year: Localized;
-  title: Localized;
-  stack: Localized[];
-  featured?: boolean;
-  links: { label: Localized; href: string }[];
-  pt: { role: string; summary: string; highlights: string[] };
-  en: { role: string; summary: string; highlights: string[] };
+  title: string;
+  stack: string[];
+  links: { type: 'code' | 'site'; label: Localized; href: string }[];
+  pt: ProjectCopy;
+  en: ProjectCopy;
 };
 
+// Mesma ordem em que o recrutador deve ler: o sistema em uso por cliente
+// primeiro, o site do ateliê por último.
 export const projects: Project[] = [
   {
     id: 'judicial-pipeline',
     year: '2026',
     title: 'Judicial Property Pipeline',
-    stack: [
-      'Java 21',
-      'Spring Boot',
-      'JPA',
-      'Flyway',
-      'PostgreSQL',
-      'Docker',
-      'Thymeleaf',
-      'Playwright',
-    ],
-    featured: true,
+    stack: ['Java 21', 'Spring Boot', 'JPA', 'Flyway', 'PostgreSQL', 'Docker', 'Thymeleaf', 'Playwright'],
     links: [
       {
-        label: 'GitHub',
+        type: 'code',
+        label: { pt: 'Código', en: 'Code' },
         href: 'https://github.com/danilobossolani/judicial-property-pipeline',
       },
     ],
     pt: {
-      role: 'Freelance · sistema sob medida',
-      summary:
-        'Sistema em Java e Spring Boot, em uso por um cliente, que coleta e organiza imóveis de leilão judicial.',
-      highlights: [
-        'Coleta automática de imóveis de leilão judicial em cerca de 10 fontes públicas (Sorocaba e Votorantim), cada uma isolada em seu próprio provider; falha em uma fonte não interrompe as outras.',
+      kind: 'Freelance, sistema sob medida em uso por cliente',
+      problem:
+        'Coleta e organiza imóveis de leilão judicial publicados em cerca de 10 fontes públicas de Sorocaba e Votorantim.',
+      did: [
+        'Coleta automática com cada fonte isolada em seu próprio provider; falha em uma fonte não interrompe as outras.',
         'Deduplicação de cadastros, filtros (cidade, bairro, status), acompanhamento de praças e valores, e central de auditoria com histórico de cada coleta.',
-        'Pensado para usuário não técnico (abre por atalho e roda no navegador), com CI rodando o quality gate a cada push e PR.',
       ],
+      highlight:
+        '72 testes automatizados (JUnit 5 e Mockito) rodando no CI do GitHub Actions a cada push e PR.',
     },
     en: {
-      role: 'Freelance · custom system',
-      summary:
-        'Java and Spring Boot system, used by a client, that collects and tracks judicial-auction properties.',
-      highlights: [
-        'Automatically collects judicial-auction listings from about 10 public sources, each isolated in its own provider, so one failing source never stops the others.',
+      kind: 'Freelance, custom system used by a client',
+      problem: 'Collects and tracks judicial-auction listings published across about 10 public sources.',
+      did: [
+        'Automatic collection with each source isolated in its own provider, so one failing source never stops the others.',
         'Duplicate detection, filters (city, neighborhood, status), tracking of auction rounds and prices, and an audit center logging every collection run.',
-        'Built for a non-technical user (desktop shortcut, runs in the browser), with CI running the quality gate on every push and PR.',
       ],
-    },
-  },
-  {
-    id: 'atelier-chris',
-    year: '2026',
-    title: 'Ateliê Chris Camacho',
-    stack: ['React', 'Vite', 'Cloudflare Workers'],
-    links: [{ label: 'Site', href: 'https://www.atelierccamacho.com.br/' }],
-    pt: {
-      role: 'Freelance · ateliê de cerâmica, São Paulo',
-      summary:
-        'Site do Ateliê Chris Camacho, entregue como trabalho freelance e publicado na Cloudflare.',
-      highlights: [
-        'Página própria por atividade (jantares, aulas, decalques), com FAQ.',
-        'Contato pelo WhatsApp com mensagem pré-preenchida.',
-        'Site estático com CSP restritiva e deploy na Cloudflare.',
-      ],
-    },
-    en: {
-      role: 'Freelance · ceramics studio, São Paulo',
-      summary:
-        'Website for the Ateliê Chris Camacho ceramics studio, delivered as freelance work and deployed on Cloudflare.',
-      highlights: [
-        'A page per activity (dinners, classes, decals), with FAQs.',
-        'WhatsApp contact using pre-filled messages.',
-        'Static site with a strict CSP, deployed on Cloudflare.',
-      ],
+      highlight: '72 automated tests (JUnit 5 and Mockito) running in GitHub Actions CI on every push and PR.',
     },
   },
   {
@@ -121,24 +92,29 @@ export const projects: Project[] = [
     year: '2026',
     title: 'AutoStore AI',
     stack: ['Node.js', 'TypeScript', 'Express', 'PostgreSQL', 'pgvector', 'Gemini API'],
-    featured: true,
-    links: [{ label: 'GitHub', href: 'https://github.com/danilobossolani/car-store-rag' }],
+    links: [
+      {
+        type: 'code',
+        label: { pt: 'Código', en: 'Code' },
+        href: 'https://github.com/danilobossolani/car-store-rag',
+      },
+    ],
     pt: {
-      role: 'Teste técnico de processo seletivo · RAG',
-      summary:
-        'Catálogo de veículos com captura de leads em PostgreSQL e assistente de IA baseado em RAG.',
-      highlights: [
+      kind: 'Teste técnico de processo seletivo',
+      problem:
+        'Catálogo de veículos que capta leads e tem um assistente de IA que responde só com dados do catálogo.',
+      did: [
+        'Captura de leads em PostgreSQL e assistente de IA baseado em RAG, que mantém o histórico da conversa.',
         'Embeddings no pgvector com busca por distância de cosseno.',
-        'O assistente responde só com dados do catálogo e mantém o histórico da conversa.',
         '17+ commits em Conventional Commits.',
       ],
     },
     en: {
-      role: 'Take-home test for a hiring process · RAG',
-      summary: 'Car catalog with lead capture in PostgreSQL and a RAG-based AI assistant.',
-      highlights: [
+      kind: 'Take-home test for a hiring process',
+      problem: 'Car catalog with lead capture and an AI assistant that answers only from catalog data.',
+      did: [
+        'Lead capture in PostgreSQL and a RAG-based AI assistant that keeps conversation history.',
         'Embeddings in pgvector with cosine-distance search.',
-        'The assistant answers only from catalog data and keeps conversation history.',
         '17+ commits using Conventional Commits.',
       ],
     },
@@ -148,69 +124,58 @@ export const projects: Project[] = [
     year: { pt: '2026 · em andamento', en: '2026 · in progress' },
     title: '+party',
     stack: ['Angular 22', 'TypeScript', 'SCSS', 'Bootstrap 5', 'Supabase', 'Figma'],
-    featured: true,
     links: [
       {
-        label: { pt: 'Sistema', en: 'System' },
+        type: 'code',
+        label: { pt: 'Código do sistema', en: 'System code' },
         href: 'https://github.com/PedroLima-07/Startup-PlusParty',
       },
-      { label: 'Landing page', href: 'https://github.com/PedroLima-07/Landing-page-Party' },
+      {
+        type: 'code',
+        label: { pt: 'Código da landing page', en: 'Landing page code' },
+        href: 'https://github.com/PedroLima-07/Landing-page-Party',
+      },
     ],
     pt: {
-      role: 'Startup One (FACENS) · equipe de 5 com Scrum e Trello',
-      summary:
-        'Comanda digital para bares, do pedido ao pagamento, com áreas para cliente, equipe e gestor. Projeto elogiado pelos professores da disciplina.',
-      highlights: [
-        'Projeto da disciplina Startup One (FACENS), em equipe de 5 com Scrum e Trello.',
-        'Um dos responsáveis pelo desenvolvimento: liderei a landing page (Angular 22, TypeScript, SCSS e Bootstrap 5) e colaboro nas demais frentes do sistema junto ao time.',
+      kind: 'Projeto da disciplina Startup One (FACENS), equipe de 5 com Scrum e Trello',
+      problem:
+        'Comanda digital para bares, do pedido ao pagamento, com áreas para cliente, equipe e gestor.',
+      did: [
+        'Um dos responsáveis pelo desenvolvimento: liderei a landing page e colaboro nas demais frentes do sistema junto ao time.',
+        'Projeto elogiado pelos professores da disciplina.',
       ],
     },
     en: {
-      role: 'Startup One course (FACENS) · team of 5 using Scrum and Trello',
-      summary:
-        'Digital tab app for bars, from ordering to payment, with areas for customers, staff and managers. Praised by the course professors.',
-      highlights: [
-        'Startup One course project (FACENS), built by a team of 5 using Scrum and Trello.',
-        'One of the developers responsible for the project: I led the landing page (Angular 22, TypeScript, SCSS and Bootstrap 5) and contribute across the rest of the system with the team.',
+      kind: 'Startup One course project (FACENS), team of 5 using Scrum and Trello',
+      problem:
+        'Digital tab app for bars, from ordering to payment, with areas for customers, staff and managers.',
+      did: [
+        'One of the developers responsible: I led the landing page and contribute across the rest of the system.',
+        'Praised by the course professors.',
       ],
     },
   },
   {
-    id: 'data-structures',
-    year: '2025 a 2026',
-    title: { pt: 'Algoritmos & Estruturas de Dados', en: 'Algorithms & Data Structures' },
-    stack: [
-      'Java',
-      { pt: 'POO', en: 'OOP' },
-      { pt: 'Árvores', en: 'Trees' },
-      { pt: 'Listas encadeadas', en: 'Linked lists' },
-    ],
-    links: [
-      {
-        label: { pt: 'Estruturas', en: 'Structures' },
-        href: 'https://github.com/danilobossolani/Estrutura-de-Dados-3s',
-      },
-      { label: 'Ranking', href: 'https://github.com/danilobossolani/Ranking-de-Jogadores-ED' },
-      { label: { pt: 'POO', en: 'OOP' }, href: 'https://github.com/danilobossolani/POO-Saves' },
-    ],
+    id: 'atelier-chris',
+    year: '2026',
+    title: 'Ateliê Chris Camacho',
+    stack: ['React', 'Vite', 'Cloudflare Workers'],
+    links: [{ type: 'site', label: 'atelierccamacho.com.br', href: 'https://www.atelierccamacho.com.br/' }],
     pt: {
-      role: 'Fundamentos · Java',
-      summary:
-        'Coleção de implementações em Java feitas ao longo do curso e por conta própria. É a base que sustenta o resto do trabalho back-end.',
-      highlights: [
-        'Sistema de ranking de jogadores e agenda de contatos com árvore binária de busca.',
-        'Listas encadeadas, pilhas e filas implementadas do zero, sem biblioteca pronta.',
-        'Exercícios de orientação a objetos com foco em modelagem e responsabilidade única.',
+      kind: 'Freelance para um ateliê de cerâmica em São Paulo',
+      problem:
+        'Site do ateliê com uma página própria para cada atividade (jantares, aulas, decalques) e FAQ.',
+      did: [
+        'Contato pelo WhatsApp com mensagem pré-preenchida.',
+        'Site estático com CSP restritiva e deploy na Cloudflare.',
       ],
     },
     en: {
-      role: 'Fundamentals · Java',
-      summary:
-        'A collection of Java implementations built through coursework and on my own. It is the foundation the rest of the back-end work stands on.',
-      highlights: [
-        'Player ranking system and a contact book backed by a binary search tree.',
-        'Linked lists, stacks and queues implemented from scratch, no ready-made library.',
-        'Object-oriented exercises focused on modeling and single responsibility.',
+      kind: 'Freelance for a ceramics studio in São Paulo',
+      problem: 'Studio website with a page per activity (dinners, classes, decals) and FAQs.',
+      did: [
+        'WhatsApp contact using pre-filled messages.',
+        'Static site with a strict CSP, deployed on Cloudflare.',
       ],
     },
   },
@@ -218,7 +183,8 @@ export const projects: Project[] = [
 
 type StackGroup = { id: string; pt: string; en: string; items: Localized[] };
 
-// Os mesmos quatro niveis do curriculo, na mesma ordem.
+// Os níveis do currículo, na mesma ordem. "IA no desenvolvimento" tem
+// seção própria (AI.tsx), por isso não se repete aqui.
 export const stackGroups: StackGroup[] = [
   {
     id: 'daily',
@@ -256,282 +222,228 @@ export const stackGroups: StackGroup[] = [
     ],
   },
   {
-    id: 'ai',
-    pt: 'IA no desenvolvimento',
-    en: 'AI-assisted dev',
-    items: [
-      {
-        pt: 'Claude Code no dia a dia, sempre revisando o código gerado',
-        en: 'Claude Code daily, always reviewing generated code',
-      },
-      {
-        pt: 'Integração de LLM via API (Gemini, RAG com pgvector)',
-        en: 'LLM integration via API (Gemini, RAG on pgvector)',
-      },
-      {
-        pt: 'Curso de Engenharia de Prompt (DIO/Bradesco)',
-        en: 'Prompt Engineering course (DIO/Bradesco)',
-      },
-    ],
-  },
-  {
     id: 'fundamentals',
     pt: 'Fundamentos',
     en: 'Fundamentals',
     items: [
       { pt: 'POO', en: 'OOP' },
       { pt: 'APIs REST', en: 'REST APIs' },
-      { pt: 'Arquitetura em camadas', en: 'Layered architecture' },
-      { pt: 'Testes unitários', en: 'Unit testing' },
+      { pt: 'arquitetura em camadas', en: 'layered architecture' },
+      { pt: 'testes unitários (JUnit 5, Mockito)', en: 'unit testing (JUnit 5, Mockito)' },
       'UI/UX',
-      { pt: 'Metodologias ágeis (Scrum)', en: 'Agile (Scrum)' },
+      { pt: 'metodologias ágeis (Scrum)', en: 'Agile (Scrum)' },
       'UML',
-      { pt: 'Estruturas de dados', en: 'Data structures' },
+      { pt: 'estruturas de dados', en: 'data structures' },
     ],
   },
 ];
 
 export const content = {
   pt: {
+    meta: {
+      title: 'Danilo Bossolani · Desenvolvedor Júnior · Java · Spring Boot',
+      description:
+        'Desenvolvedor júnior em Java e Spring Boot com PostgreSQL, Node.js e TypeScript. Freelancer desde agosto de 2026, em Sorocaba, SP. Disponível para CLT ou PJ.',
+    },
     nav: {
       work: 'Projetos',
-      about: 'Sobre',
+      experience: 'Experiência',
       stack: 'Stack',
-      path: 'Trajetória',
       contact: 'Contato',
       menu: 'Menu',
       close: 'Fechar',
+      skip: 'Pular para o conteúdo',
       themeLabel: 'Alternar tema',
       langLabel: 'Switch to English',
     },
     hero: {
-      available: 'Disponível para primeira vaga como dev júnior · CLT ou PJ',
-      role: 'Desenvolvedor Júnior',
-      line1: 'Construo',
-      line2: 'APIs, sistemas',
-      line3: 'e produtos',
-      accent: 'que aguentam o mundo real.',
-      intro:
-        'Desenvolvo back-end em Java e Spring Boot com PostgreSQL e também trabalho com Node.js e TypeScript. Desde agosto de 2026 atuo como freelancer e entrego software para clientes reais, do levantamento de requisitos ao deploy. Estou no 4º período de ADS na FACENS, com conclusão prevista para junho de 2027.',
-      ctaWork: 'Ver projetos',
-      ctaContact: 'Falar comigo',
+      role: 'Desenvolvedor Júnior · Java · Spring Boot · IA aplicada',
+      available: 'Disponível para CLT ou PJ',
+      summary:
+        'Desenvolvo back-end em Java e Spring Boot com PostgreSQL e também trabalho com Node.js e TypeScript. Desde agosto de 2026 atuo como freelancer e entrego software para clientes reais, do levantamento de requisitos ao deploy. Estou no 4º período de ADS na FACENS, com conclusão prevista para junho de 2027, e busco minha primeira vaga júnior.',
       cv: 'Baixar currículo',
-      cvPt: 'Baixar currículo em português',
-      cvEn: 'Baixar currículo em inglês',
-      scroll: 'Role para ver',
-    },
-    about: {
-      eyebrow: 'Sobre',
-      title: 'Quem está do outro lado do commit',
-      p1: 'Sou Danilo, desenvolvedor júnior em Sorocaba. Trabalho principalmente com Java 21, Spring Boot, JPA e PostgreSQL, e também com Node.js, TypeScript e Express. Estou no 4º período de Análise e Desenvolvimento de Sistemas na FACENS, com conclusão prevista para junho de 2027.',
-      p2: 'Desde agosto de 2026 atuo como freelancer: escopo, prazo, desenvolvimento, deploy e suporte negociados direto com o cliente. Hoje tenho um sistema em Java e Spring em uso por um cliente, que coleta e organiza imóveis de leilão judicial, e um site no ar para um ateliê de cerâmica em São Paulo.',
-      p3: 'Uso Claude Code no dia a dia e sempre reviso o código gerado. Também integro LLM via API: o AutoStore AI é um assistente RAG com pgvector que responde só com base nos dados do catálogo. Agora busco minha primeira vaga como dev júnior, CLT ou PJ.',
-      facts: [
-        { label: 'Base', value: 'Sorocaba, SP · remoto, híbrido ou presencial' },
-        { label: 'Formação', value: 'ADS · FACENS · 2025 – jun/2027 · 4º período' },
+      cvOther: 'Versão em inglês (PDF)',
+      contact: 'Contato',
+      summaryLabel: 'Resumo',
+      highlights: [
         {
-          label: 'Idiomas',
-          value: 'Português nativo · Inglês B2 · Espanhol intermediário · Japonês A1',
+          label: 'Em uso por cliente',
+          body: 'Sistema Java/Spring com 72 testes e CI que coleta imóveis de leilão judicial',
         },
         {
-          label: 'Disponibilidade',
-          value: 'CLT ou PJ · remoto em todo o Brasil ou presencial/híbrido em Sorocaba',
-        },
-      ],
-    },
-    stack: {
-      eyebrow: 'Stack',
-      title: 'Ferramentas que uso de verdade',
-      note: 'Separado por nível: o que uso no dia a dia e o que já usei em projeto.',
-    },
-    ai: {
-      eyebrow: 'Como eu trabalho',
-      title: 'IA como par, não como piloto automático',
-      p: 'Uso Claude Code no dia a dia e sempre reviso o código gerado. A decisão continua sendo minha; a ferramenta só acelera o caminho até ela. Também integro LLM via API: no AutoStore AI, os embeddings ficam no pgvector, a busca é por distância de cosseno e o assistente responde só com dados do catálogo.',
-      cards: [
-        {
-          title: 'Claude Code no dia a dia',
-          body: 'Faz parte do meu fluxo de desenvolvimento para escrever, entender e ajustar código.',
+          label: 'IA com dados reais',
+          body: 'Assistente RAG com pgvector que responde só com base no catálogo',
         },
         {
-          title: 'Revisão do código gerado',
-          body: 'Todo código gerado passa pela minha revisão antes de entrar no projeto.',
-        },
-        {
-          title: 'RAG com pgvector',
-          body: 'No AutoStore AI: embeddings no pgvector, busca por distância de cosseno e respostas só com dados do catálogo.',
-        },
-        {
-          title: 'Engenharia de Prompt',
-          body: 'Curso de Engenharia de Prompt pela DIO/Bradesco.',
+          label: 'Disponível',
+          body: 'CLT ou PJ · remoto em todo o Brasil ou presencial/híbrido em Sorocaba',
         },
       ],
     },
     work: {
-      eyebrow: 'Projetos',
-      title: 'Trabalho selecionado',
-      note: 'Trabalho freelance para clientes, teste técnico e projetos acadêmicos e em equipe, do back-end em Java a sistemas com IA.',
-      viewAll: 'Ver tudo no GitHub',
+      label: 'Projetos',
+      problem: 'O que resolve',
+      did: 'O que fiz',
+      viewAll: 'Todos os repositórios no GitHub',
     },
-    path: {
-      eyebrow: 'Trajetória',
-      title: 'Como cheguei aqui',
+    experience: {
+      label: 'Experiência',
+      deliveries: 'Entregas',
       items: [
         {
-          period: 'ago/2026 – atual',
           title: 'Desenvolvedor Freelance',
-          org: 'Autônomo · remoto',
-          body: 'Escopo, prazo, desenvolvimento, deploy e suporte negociados direto com o cliente. Entregas: o Judicial Property Pipeline, em Java e Spring Boot, e o site do Ateliê Chris Camacho.',
+          org: 'Autônomo, remoto',
+          period: 'ago/2026 – atual',
+          body: 'Escopo, prazo, desenvolvimento, deploy e suporte negociados direto com o cliente.',
+          projects: ['judicial-pipeline', 'atelier-chris'],
         },
         {
-          period: '2025 – jun/2027',
-          title: 'Tecnólogo em Análise e Desenvolvimento de Sistemas',
-          org: 'FACENS · Sorocaba, SP',
-          body: '4º período, conclusão prevista para junho de 2027. Fundamentos: POO, APIs REST, arquitetura em camadas, testes unitários, UI/UX, metodologias ágeis (Scrum), UML e estruturas de dados.',
-        },
-        {
-          period: 'out/2025 – mai/2026',
           title: 'Auxiliar de Pós-vendas',
-          org: 'Óticas Prevent · Sorocaba',
-          body: 'Pós-venda e atendimento em loja de alto fluxo com metas; cadastro e atualização de dados de clientes no sistema de gestão da loja.',
+          org: 'Óticas Prevent, Sorocaba',
+          period: 'out/2025 – mai/2026',
+          body: 'Pós-venda e atendimento em loja de alto fluxo com metas; cadastro de clientes no sistema de gestão.',
+          projects: [],
         },
       ],
     },
+    education: {
+      label: 'Formação',
+      course: 'Tecnólogo em Análise e Desenvolvimento de Sistemas',
+      school: 'FACENS, Sorocaba',
+      period: '2025 – jun/2027 (previsão), 4º período',
+      languagesLabel: 'Idiomas',
+      languages: 'português nativo, inglês B2, espanhol intermediário (boa compreensão), japonês A1',
+    },
+    stack: {
+      label: 'Stack',
+    },
+    ai: {
+      label: 'IA no desenvolvimento',
+      items: [
+        'Claude Code no dia a dia, sempre revisando o código gerado.',
+        'Integração de LLM via API: Gemini com RAG sobre pgvector no AutoStore AI.',
+        'Curso de Engenharia de Prompt (DIO/Bradesco).',
+      ],
+    },
     contact: {
-      eyebrow: 'Contato',
-      title: 'Vamos construir algo',
-      body: 'Busco minha primeira vaga como dev júnior, CLT ou PJ, remoto em todo o Brasil ou presencial/híbrido em Sorocaba. Se você tem uma vaga ou um projeto de back-end, me chama.',
+      label: 'Contato',
+      body: 'Busco minha primeira vaga júnior, CLT ou PJ, remoto em todo o Brasil ou presencial/híbrido em Sorocaba.',
       emailLabel: 'E-mail',
       phoneLabel: 'WhatsApp',
+      whatsapp: 'Conversar no WhatsApp',
       cvLabel: 'Currículo',
+      cvPt: 'Baixar currículo em português (PDF)',
+      cvEn: 'Baixar currículo em inglês (PDF)',
       copy: 'Copiar e-mail',
       copied: 'Copiado',
     },
     footer: {
-      built: 'Feito com React, TypeScript e Tailwind. Publicado no GitHub Pages.',
-      rights: 'Todos os direitos reservados.',
+      updated: 'Atualizado em outubro de 2026',
       top: 'Voltar ao topo',
     },
   },
 
   en: {
+    meta: {
+      title: 'Danilo Bossolani · Junior Developer · Java · Spring Boot',
+      description:
+        'Junior developer building backends in Java and Spring Boot with PostgreSQL, plus Node.js and TypeScript. Freelancing since August 2026. Remote from Brazil (GMT-3).',
+    },
     nav: {
-      work: 'Work',
-      about: 'About',
+      work: 'Projects',
+      experience: 'Experience',
       stack: 'Stack',
-      path: 'Path',
       contact: 'Contact',
       menu: 'Menu',
       close: 'Close',
+      skip: 'Skip to content',
       themeLabel: 'Toggle theme',
       langLabel: 'Mudar para português',
     },
     hero: {
-      available: 'Open to a first junior developer role · contractor or full-time',
-      role: 'Junior Developer',
-      line1: 'I build',
-      line2: 'APIs, systems',
-      line3: 'and products',
-      accent: 'that hold up in the real world.',
-      intro:
-        "I build backends in Java and Spring Boot with PostgreSQL, and also work with Node.js and TypeScript. Since August 2026 I've been freelancing, shipping software to real clients from requirements to deployment. I'm finishing an associate degree in Systems Analysis and Development (expected June 2027).",
-      ctaWork: 'See the work',
-      ctaContact: 'Get in touch',
+      role: 'Junior Developer · Java · Spring Boot · Applied AI',
+      available: 'Available for contractor or full-time roles',
+      summary:
+        "I build backends in Java and Spring Boot with PostgreSQL, and also work with Node.js and TypeScript. Since August 2026 I've been freelancing, shipping software to real clients from requirements to deployment. I'm finishing an associate degree in Systems Analysis and Development (expected June 2027) and looking for my first junior role.",
       cv: 'Download résumé',
-      cvPt: 'Download résumé in Portuguese',
-      cvEn: 'Download résumé in English',
-      scroll: 'Scroll',
-    },
-    about: {
-      eyebrow: 'About',
-      title: 'Who is on the other side of the commit',
-      p1: "I'm Danilo, a junior developer based in Sorocaba, Brazil. I work mainly with Java 21, Spring Boot, JPA and PostgreSQL, and also with Node.js, TypeScript and Express. I'm finishing an associate degree in Systems Analysis and Development at FACENS, expected June 2027.",
-      p2: "Since August 2026 I've been freelancing: I handle scope, timeline, development, deployment and support directly with each client. Right now that means a Java/Spring system used by a client, which collects and tracks judicial-auction properties, and a live website for a ceramics studio in São Paulo.",
-      p3: "I use Claude Code daily and always review the generated code. I also integrate LLMs via API: AutoStore AI is a RAG assistant on pgvector that answers only from catalog data. I'm looking for my first role as a junior developer, contractor or full-time.",
-      facts: [
-        { label: 'Based in', value: 'Sorocaba, Brazil · remote (GMT-3)' },
-        { label: 'Studying', value: 'Systems Analysis & Dev · FACENS · 2025 – Jun 2027' },
+      cvOther: 'Portuguese version (PDF)',
+      contact: 'Contact',
+      summaryLabel: 'Summary',
+      highlights: [
         {
-          label: 'Languages',
-          value: 'Portuguese (native) · English (B2) · Spanish (intermediate) · Japanese (A1)',
+          label: 'Used by a client',
+          body: 'Java/Spring system with 72 tests and CI that tracks judicial-auction properties',
         },
         {
-          label: 'Availability',
-          value: 'GMT-3, overlaps US business hours · contractor or full-time',
-        },
-      ],
-    },
-    stack: {
-      eyebrow: 'Stack',
-      title: 'Tools I actually use',
-      note: 'Split by level: what I use daily and what I have used in projects.',
-    },
-    ai: {
-      eyebrow: 'How I work',
-      title: 'AI as a partner, not as autopilot',
-      p: 'I use Claude Code daily and always review the generated code. The decision stays mine; the tool just shortens the path to it. I also integrate LLMs via API: in AutoStore AI, embeddings live in pgvector, search uses cosine distance and the assistant answers only from catalog data.',
-      cards: [
-        {
-          title: 'Claude Code daily',
-          body: 'Part of my development workflow for writing, understanding and adjusting code.',
+          label: 'Grounded AI',
+          body: 'RAG assistant on pgvector that answers only from catalog data',
         },
         {
-          title: 'Reviewing generated code',
-          body: 'Every piece of generated code goes through my review before it enters the project.',
-        },
-        {
-          title: 'RAG on pgvector',
-          body: 'In AutoStore AI: embeddings in pgvector, cosine-distance search and answers only from catalog data.',
-        },
-        {
-          title: 'Prompt Engineering',
-          body: 'Prompt Engineering course by DIO/Bradesco.',
+          label: 'Remote-ready',
+          body: 'GMT-3, overlaps US business hours · contractor or full-time',
         },
       ],
     },
     work: {
-      eyebrow: 'Work',
-      title: 'Selected projects',
-      note: 'Freelance client work, a take-home test, and academic and team projects, from Java backends to AI systems.',
-      viewAll: 'See everything on GitHub',
+      label: 'Projects',
+      problem: 'What it solves',
+      did: 'What I did',
+      viewAll: 'All repositories on GitHub',
     },
-    path: {
-      eyebrow: 'Path',
-      title: 'How I got here',
+    experience: {
+      label: 'Experience',
+      deliveries: 'Delivered',
       items: [
         {
-          period: 'Aug 2026 – present',
           title: 'Freelance Developer',
-          org: 'Self-employed · remote',
-          body: 'I handle scope, timeline, development, deployment and support directly with each client. Delivered so far: the Judicial Property Pipeline, in Java and Spring Boot, and the Ateliê Chris Camacho website.',
+          org: 'Self-employed, remote',
+          period: 'Aug 2026 – present',
+          body: 'I handle scope, timeline, development, deployment and support directly with each client.',
+          projects: ['judicial-pipeline', 'atelier-chris'],
         },
         {
-          period: '2025 – Jun 2027',
-          title: 'Associate Degree in Systems Analysis and Development',
-          org: 'FACENS · Sorocaba, Brazil',
-          body: 'Expected June 2027. Fundamentals: OOP, REST APIs, layered architecture, unit testing, UI/UX, Agile (Scrum), UML and data structures.',
-        },
-        {
-          period: 'Oct 2025 – May 2026',
           title: 'After-sales Assistant',
-          org: 'Óticas Prevent (optical retail) · Brazil',
-          body: "After-sales and customer service in a high-traffic, target-driven store; kept customer records up to date in the store's management system.",
+          org: 'Óticas Prevent (optical retail), Brazil',
+          period: 'Oct 2025 – May 2026',
+          body: 'After-sales and customer service in a high-traffic, target-driven store; kept customer records up to date.',
+          projects: [],
         },
       ],
     },
+    education: {
+      label: 'Education',
+      course: 'Associate Degree in Systems Analysis and Development',
+      school: 'FACENS, Sorocaba, Brazil',
+      period: '2025 – Jun 2027 (expected)',
+      languagesLabel: 'Languages',
+      languages:
+        'Portuguese (native), English (B2), Spanish (intermediate, strong comprehension), Japanese (A1)',
+    },
+    stack: {
+      label: 'Stack',
+    },
+    ai: {
+      label: 'AI-assisted development',
+      items: [
+        'Claude Code daily, always reviewing generated code.',
+        'LLM integration via API: Gemini with RAG on pgvector in AutoStore AI.',
+        'Prompt Engineering course (DIO/Bradesco).',
+      ],
+    },
     contact: {
-      eyebrow: 'Contact',
-      title: 'Let us build something',
-      body: "I'm looking for my first role as a junior developer, contractor or full-time. I work remotely from Brazil (GMT-3), overlapping US business hours. If you have an opening or a backend project, reach out.",
+      label: 'Contact',
+      body: "I'm looking for my first junior role, contractor or full-time. I work remotely from Brazil (GMT-3), overlapping US business hours.",
       emailLabel: 'Email',
       phoneLabel: 'WhatsApp',
+      whatsapp: 'Message on WhatsApp',
       cvLabel: 'Résumé',
+      cvPt: 'Download résumé in Portuguese (PDF)',
+      cvEn: 'Download résumé in English (PDF)',
       copy: 'Copy email',
       copied: 'Copied',
     },
     footer: {
-      built: 'Built with React, TypeScript and Tailwind. Published on GitHub Pages.',
-      rights: 'All rights reserved.',
+      updated: 'Updated October 2026',
       top: 'Back to top',
     },
   },
